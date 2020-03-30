@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import okhttp3.Call;
@@ -56,8 +57,13 @@ import okhttp3.Response;
 
                         JSONObject jsonBody = new JSONObject(body);
                         JSONArray results = jsonBody.getJSONArray("results");
-                        JSONObject film1 = results.getJSONObject(0);
-                        JSONObject film2 = results.getJSONObject(1);
+
+                        ArrayList<Film> filmList = new ArrayList();
+                        // boucle pour enregistrer les films dans une liste
+
+                        for (int i=0; i <=results.length();i++) {
+                        JSONObject film1 = results.getJSONObject(i);
+                        //JSONObject film2 = results.getJSONObject(1);
 
                         int idFilm = film1.getInt("id");
                         String filmImage = film1.getString("poster_path");
@@ -65,17 +71,19 @@ import okhttp3.Response;
                         String dateSortie =film1.getString("release_date");
                         String resume = film1.getString("overview");
                         JSONArray idGenre = film1.getJSONArray("genre_ids");
-                        int idPremierGenre = (int)idGenre.get(0);
+                        int idPremierGenre = (int)idGenre.get(i);
                         float popularite = film1.getLong("popularity");
 
-
                         Film film = new Film(idFilm,filmImage,titre,dateSortie,idPremierGenre,resume,popularite);
+                        filmList.add(film);
+                        }
 
 
-                        Log.i("MainActivity", "resultat film1 page = 1 " + film1);
-                        Log.i("MainActivity", "resultat film2 page = 1 " + film2);
-                        Log.i ("MainActivity", "id du film 1 page = 1 " + idFilm);
-                        Log.i("MainActivity","objet film : " + film.toString());
+                        //Log.i("MainActivity", "resultat film1 page = 1 " + film1);
+                       // Log.i("MainActivity", "resultat film2 page = 1 " + film2);
+                       // Log.i ("MainActivity", "id du film 1 page = 1 " + idFilm);
+                        //Log.i("MainActivity","objet film : " + film.toString());
+                        Log.i("MainActivity","la list de sfilms "+filmList);
                        // System.out.println(film1.getString("title"));
 
                        /* Movie movie1 = new Movie(film1.getString("title"),
@@ -88,9 +96,9 @@ import okhttp3.Response;
                         e.getMessage();
                     }
                     //  System.out.println("je recup" + jsonArray[1]);
-                        Log.i("MainActivity", "onResponse : body=" + body);
+                       // Log.i("MainActivity", "onResponse : body=" + body);
 
-                    Log.i("MainActivity", "Started HTTP REquest");
+                    //Log.i("MainActivity", "Started HTTP REquest");
                 }
             });
         }
