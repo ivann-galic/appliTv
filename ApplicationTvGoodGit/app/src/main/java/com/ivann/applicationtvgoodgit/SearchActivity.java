@@ -61,7 +61,7 @@ import okhttp3.Response;
                         ArrayList<Film> filmList = new ArrayList();
                         // boucle pour enregistrer les films dans une liste
 
-                        for (int i=0; i <=results.length();i++) {
+                        for (int i=0; i <results.length();i++) {
                         JSONObject film1 = results.getJSONObject(i);
                         //JSONObject film2 = results.getJSONObject(1);
 
@@ -71,7 +71,7 @@ import okhttp3.Response;
                         String dateSortie =film1.getString("release_date");
                         String resume = film1.getString("overview");
                         JSONArray idGenre = film1.getJSONArray("genre_ids");
-                        int idPremierGenre = (int)idGenre.get(i);
+                        int idPremierGenre = (int)idGenre.get(0);
                         float popularite = film1.getLong("popularity");
 
                         Film film = new Film(idFilm,filmImage,titre,dateSortie,idPremierGenre,resume,popularite);
@@ -83,7 +83,7 @@ import okhttp3.Response;
                        // Log.i("MainActivity", "resultat film2 page = 1 " + film2);
                        // Log.i ("MainActivity", "id du film 1 page = 1 " + idFilm);
                         //Log.i("MainActivity","objet film : " + film.toString());
-                        Log.i("MainActivity","la list de sfilms "+filmList);
+                        Log.i("MainActivity","la list de sfilms "+filmList.toString());
                        // System.out.println(film1.getString("title"));
 
                        /* Movie movie1 = new Movie(film1.getString("title"),
