@@ -99,5 +99,16 @@ public class Film implements Parcelable  {
         return popularite;
     }
 
-
+    @Override
+    public String toString() {
+        return "Film{" +
+                "idFilm=" + idFilm +
+                ", filmImage='" + filmImage + '\'' +
+                ", titre='" + titre + '\'' +
+                ", dateSortie='" + dateSortie + '\'' +
+                ", idGenre=" + idGenre +
+                ", resume='" + resume + '\'' +
+                ", popularite=" + popularite +
+                '}';
+    }
 }
