@@ -1,3 +1,4 @@
+/*
 package com.ivann.applicationtvgoodgit;
 
 
@@ -83,4 +84,4 @@ class ViewHolder extends RecyclerView.ViewHolder{
         like = itemView.findViewById(R.id.imageButtonLike);
     }
 }
-}
+}*/
