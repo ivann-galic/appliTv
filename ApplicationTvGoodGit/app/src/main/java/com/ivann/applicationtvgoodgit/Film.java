@@ -111,5 +111,4 @@ public class Film implements Parcelable  {
                 ", popularite=" + popularite +
                 '}';
     }
-    // test ignore
 }
