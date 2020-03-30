@@ -10,8 +10,10 @@
         android:id="@+id/textViewCollections"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
         android:text="Mes collections"
+        android:textColor="#212121"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,8 +21,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
+        app:layout_constraintVertical_bias="0.206" />
 
     <TextView
         android:id="@+id/textViewNouveautés"
@@ -29,6 +31,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:text="Nouveautés"
+        android:textColor="#212121"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,6 +46,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:text="Recherche"
+        android:textColor="#212121"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,12 +61,22 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:text="A propos"
+        android:textColor="#212121"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNouveautés" />
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="417dp"
+        android:layout_height="145dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
