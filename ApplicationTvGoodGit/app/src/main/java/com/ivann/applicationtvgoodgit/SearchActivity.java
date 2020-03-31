@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -55,6 +56,15 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String body = response.body().string();
 
+                final Button buttonFilter = findViewById(R.id.buttonFilter);
+                final CardView CardViewFilter = findViewById(R.id.CardViewFilter);
+                buttonFilter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CardViewFilter.setVisibility(View.VISIBLE);
+                    }
+                });
+
                 try {
 
                     JSONObject jsonBody = new JSONObject(body);
@@ -92,7 +102,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(SearchActivity.this, FocusFilmActivity.class);
                     intent.putExtra("FilmList", filmList);
-                    startActivity(intent);
+                    //startActivity(intent);
 
                     //Log.i("MainActivity", "resultat film1 page = 1 " + film1);
                     // Log.i("MainActivity", "resultat film2 page = 1 " + film2);

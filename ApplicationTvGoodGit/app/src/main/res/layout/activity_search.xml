@@ -52,4 +52,107 @@
         app:layout_constraintStart_toEndOf="@+id/textViewSearchTitle"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/popcorn" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewFilter"
+        android:layout_width="326dp"
+        android:layout_height="223dp"
+        android:layout_marginTop="300dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFilter">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".SearchActivity">
+
+            <RadioGroup
+                android:id="@+id/RadioGroupFilter"
+                android:layout_width="195dp"
+                android:layout_height="129dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radioButtonTitre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Titre" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Date de sortie" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonGenre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Genre" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonPopularite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Popularité" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewGenres"
+        android:layout_width="321dp"
+        android:layout_height="371dp"
+        android:layout_marginTop="30dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFilter">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="371dp"
+            tools:context=".SearchActivity">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="194dp"
+                android:layout_height="262dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radioButtonAction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Action" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonAventure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aventure" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonAnimation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Animation" />
+
+                <RadioButton
+                    android:id="@+id/radioButton8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RadioButton" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
