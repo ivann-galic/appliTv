@@ -39,15 +39,16 @@ public class ListFilmActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
+        Intent srcIntent = getIntent();
+        filmList = srcIntent.getParcelableArrayListExtra("FilmList");
+
+
         setContentView(R.layout.activity_list_film);
+        adapter = new FilmAdapter(filmList);
 
-        Intent srcintent = getIntent();
-        this.filmList = srcintent.getParcelableArrayListExtra("FilmList");
-        this.adapter = new FilmAdapter(filmList);
-
-        for (int i=0; i<filmList.size(); i++){
+       /* for (int i=0; i<filmList.size(); i++){
             filmList.get(i);
-        }
+        }*/
         RecyclerView recyclerView = findViewById(R.id.recyclerViewFilm);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

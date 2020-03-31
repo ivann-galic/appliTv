@@ -19,30 +19,32 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.ViewHolder> implements View.OnClickListener {
+public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.ViewHolder> {
 
 
-private List<Film> films;
+private List<Film> filmList;
 
-public FilmAdapter(List<Film> films) {
-        this.films = films;
+public FilmAdapter(List<Film> filmList) {
+        this.filmList = filmList;
         }
 
 @NonNull
 @Override
 public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_film, parent,false);
+
         return new ViewHolder(view);
         }
 
 @Override
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Film film = films.get(position);
+        Film film = filmList.get(position);
 
-    String image = String.valueOf(Picasso.get().load(film.filmImage));
+ Picasso.get().load(filmList.get(position).filmImage);
 
-        holder.filmImage.setImageResource(Integer.parseInt(image));
+   //     holder.filmImage.setImageResource(Integer.parseInt(image));
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(holder.popularite.toString());
@@ -53,10 +55,11 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 @Override
 public int getItemCount() {
-        return films.size();
+
+    return filmList.size();
         }
 
-@Override
+/*@Override
 public void onClick(View v) {
         ArrayList<Film> list;
         Film a = (Film) v.getTag();
@@ -68,11 +71,11 @@ public void onClick(View v) {
         Intent intent = new Intent(context,MainActivity.class);
         intent.putExtra("quizz",list);
         context.startActivity(intent);
-        }
+        }*/
 
-class ViewHolder extends RecyclerView.ViewHolder{
+public class ViewHolder extends RecyclerView.ViewHolder{
     final ImageView filmImage;
-    final Button like;
+   // final Button like;
     final TextView titre;
     final TextView date;
     final TextView popularite;
@@ -85,7 +88,7 @@ class ViewHolder extends RecyclerView.ViewHolder{
         date = itemView.findViewById(R.id.textViewDate);
         popularite = itemView.findViewById(R.id.textViewPopularite);
         genre = itemView.findViewById(R.id.textViewGenre);
-        like = itemView.findViewById(R.id.imageButtonLike);
+//        like = itemView.findViewById(R.id.imageButtonLike);
     }
 }
 }
