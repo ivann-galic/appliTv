@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -20,7 +21,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -55,13 +55,43 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String body = response.body().string();
-
+                final CardView cardViewGenres = (CardView) findViewById(R.id.CardViewGenres);
                 final Button buttonFilter = findViewById(R.id.buttonFilter);
-                final CardView CardViewFilter = findViewById(R.id.CardViewFilter);
+                final CardView cardViewFilter = findViewById(R.id.CardViewFilter);
+                // Lors d'un clic sur l'option "genre", une cardView prend la place pour afficher tous les genres.
                 buttonFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CardViewFilter.setVisibility(View.VISIBLE);
+                        cardViewFilter.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                final RadioGroup RadioGroupGenre1 = (RadioGroup) findViewById(R.id.RadioGroupGenre1);
+                final RadioButton radioClickedGenre1 = (RadioButton) findViewById(RadioGroupGenre1.getCheckedRadioButtonId());
+                final RadioGroup RadioGroupGenre2 = (RadioGroup) findViewById(R.id.RadioGroupGenre2);
+                final RadioButton radioClickedGenre2 = (RadioButton) findViewById(RadioGroupGenre2.getCheckedRadioButtonId());
+
+                final RadioGroup RadioGroupFilter = (RadioGroup) findViewById(R.id.RadioGroupFilter);
+                final RadioButton radioFilterGenre= (RadioButton) findViewById(R.id.radioButtonGenre);
+                // Lors d'un clic sur le bouton fermer (croix), une cardView prend la place pour afficher de nouveau
+                // les options de filtres.
+                radioFilterGenre.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RadioGroupFilter.clearCheck();
+                        cardViewFilter.setVisibility(View.INVISIBLE);
+                        cardViewGenres.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                final ImageButton buttonCloseGenres = (ImageButton) findViewById(R.id.imageButtonCloseGenres);
+                buttonCloseGenres.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        cardViewGenres.setVisibility(View.INVISIBLE);
+                        cardViewFilter.setVisibility(View.VISIBLE);
+                        RadioGroupGenre1.clearCheck();
+                        RadioGroupGenre2.clearCheck();
                     }
                 });
 
