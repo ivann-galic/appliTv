@@ -6,7 +6,10 @@ import android.os.Parcelable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -28,5 +31,8 @@ public class FocusFilmActivity extends AppCompatActivity {
          textViewParution.setText(filmList.get(0).dateSortie);
         final TextView textViewResume = findViewById(R.id.textViewResume);
       textViewResume.setText(filmList.get(0).resume);
+        ImageView imageViewPoster = findViewById(R.id.imageViewPoster);
+        Picasso.get().load(filmList.get(0).filmImage).into(imageViewPoster);// utilisation de la lib Picasso qui permet de choper une image via url ultra simplement
+        final TextView textViewGenre =
     }
 }
