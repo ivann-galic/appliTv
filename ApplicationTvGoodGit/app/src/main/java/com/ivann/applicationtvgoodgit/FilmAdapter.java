@@ -44,7 +44,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
  Picasso.get().load(filmList.get(position).filmImage);
 
-   //     holder.filmImage.setImageResource(Integer.parseInt(image));
+        Picasso.get().load(filmList.get(position).filmImage).into(holder.filmImage);
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(holder.popularite.toString());
