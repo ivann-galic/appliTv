@@ -169,16 +169,17 @@ public class SearchActivity extends AppCompatActivity {
 
                         JSONArray idGenre = film1.getJSONArray("genre_ids");
                         int idPremierGenre = (int) idGenre.get(0);
+
                         float popularite = film1.getLong("popularity");
 
-                        filmList.add(new Film(idFilm, filmImage, titre, dateSortie, idPremierGenre, resume, popularite));
+                        filmList.add(new Film(idFilm, filmImage, titre, dateSortie, genreToString(idPremierGenre), resume, popularite));
 
                     }
                     System.out.println(filmList.get(3).toString());
 
                     Intent intent = new Intent(SearchActivity.this, FocusFilmActivity.class);
                     intent.putExtra("FilmList", filmList);
-                    //startActivity(intent);
+                    startActivity(intent);
 
                     //Log.i("MainActivity", "resultat film1 page = 1 " + film1);
                     // Log.i("MainActivity", "resultat film2 page = 1 " + film2);

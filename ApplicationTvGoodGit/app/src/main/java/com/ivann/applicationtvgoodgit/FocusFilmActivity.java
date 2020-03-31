@@ -33,6 +33,7 @@ public class FocusFilmActivity extends AppCompatActivity {
       textViewResume.setText(filmList.get(0).resume);
         ImageView imageViewPoster = findViewById(R.id.imageViewPoster);
         Picasso.get().load(filmList.get(0).filmImage).into(imageViewPoster);// utilisation de la lib Picasso qui permet de choper une image via url ultra simplement
-       
+        final TextView textViewGenre = findViewById(R.id.textViewGenre);
+        textViewGenre.setText(filmList.get(0).Genre);
     }
 }
