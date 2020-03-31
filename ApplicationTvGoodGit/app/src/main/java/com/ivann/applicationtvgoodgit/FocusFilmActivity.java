@@ -18,14 +18,15 @@ public class FocusFilmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_focus_film);
 
         Intent srcIntent = getIntent();
-        final ArrayList<Film> filmList = srcIntent.getParcelableArrayListExtra("filmList");
-        assert filmList != null;
+        final ArrayList <Film> filmList = srcIntent.getParcelableArrayListExtra("FilmList");
+
         Log.i("FocusActivity", "la list des films " + filmList);
-/*        final TextView textViewTitle = findViewById(R.id.textViewTitle);
-        textViewTitle.setText(filmList.get(0).titre);*/
+
+        final TextView textViewTitle = findViewById(R.id.textViewTitle);
+        textViewTitle.setText(filmList.get(0).titre);
         final TextView textViewParution = findViewById(R.id.textViewParution);
-        textViewParution.setText(filmList.get(0).dateSortie);
+         textViewParution.setText(filmList.get(0).dateSortie);
         final TextView textViewResume = findViewById(R.id.textViewResume);
-        textViewResume.setText(filmList.get(0).resume);
+      textViewResume.setText(filmList.get(0).resume);
     }
 }

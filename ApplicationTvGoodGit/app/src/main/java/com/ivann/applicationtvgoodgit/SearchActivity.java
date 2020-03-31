@@ -29,6 +29,7 @@ import okhttp3.Response;
 
 
 public class SearchActivity extends AppCompatActivity {
+    ArrayList<Film> films;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +86,13 @@ public class SearchActivity extends AppCompatActivity {
                         float popularite = film1.getLong("popularity");
 
                         filmList.add(new Film(idFilm, filmImage, titre, dateSortie, idPremierGenre, resume, popularite));
+
                     }
+                    System.out.println(filmList.get(3).toString());
 
                     Intent intent = new Intent(SearchActivity.this, FocusFilmActivity.class);
-                    intent.putParcelableArrayListExtra("FilmList", filmList);
+                    intent.putExtra("FilmList", filmList);
+                    startActivity(intent);
 
                     //Log.i("MainActivity", "resultat film1 page = 1 " + film1);
                     // Log.i("MainActivity", "resultat film2 page = 1 " + film2);
