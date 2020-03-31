@@ -39,6 +39,82 @@ public class SearchActivity extends AppCompatActivity {
         loadDataFromApi();
     }
 
+
+
+    public String genreToString(int number){
+
+        switch (number){
+
+            case 28 :
+                return "Action";
+
+            case 12:
+                return "Aventure";
+
+            case 16:
+                return "Animation";
+
+            case 35:
+                return "Comédie";
+
+            case 80:
+                return "Crime";
+
+            case 99:
+                return "Documentaire";
+
+            case 18:
+                return "Drame";
+
+            case 10751:
+                return "Familial";
+
+            case 14:
+                return "Fantastique";
+
+            case 36:
+                return "Histoire";
+
+            case 27:
+                return "Horreur";
+
+            case 10402:
+                return "Musique";
+
+            case 9648:
+                return "Mystère";
+
+            case 10749:
+                return "Romance";
+
+            case 878:
+                return "Science-fiction";
+
+            case 10770:
+                return "Téléfilm";
+
+            case 53:
+                return "Thriller";
+
+            case 10752:
+                return "Guerre";
+
+            case 37:
+                return "Western";
+
+            default:
+                return "erreur de catégorie";
+
+
+        }
+
+
+
+
+
+
+    }
+
     private void loadDataFromApi() {
         //    String userChoice = userchoice();
         OkHttpClient client = new OkHttpClient();
@@ -123,16 +199,17 @@ public class SearchActivity extends AppCompatActivity {
 
                         JSONArray idGenre = film1.getJSONArray("genre_ids");
                         int idPremierGenre = (int) idGenre.get(0);
+
                         float popularite = film1.getLong("popularity");
 
-                        filmList.add(new Film(idFilm, filmImage, titre, dateSortie, idPremierGenre, resume, popularite));
+                        filmList.add(new Film(idFilm, filmImage, titre, dateSortie, genreToString(idPremierGenre), resume, popularite));
 
                     }
                     System.out.println(filmList.get(3).toString());
 
                     Intent intent = new Intent(SearchActivity.this, FocusFilmActivity.class);
                     intent.putExtra("FilmList", filmList);
-                    //startActivity(intent);
+                    startActivity(intent);
 
                     //Log.i("MainActivity", "resultat film1 page = 1 " + film1);
                     // Log.i("MainActivity", "resultat film2 page = 1 " + film2);
