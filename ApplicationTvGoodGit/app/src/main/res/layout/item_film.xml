@@ -5,30 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="200dp">
 
-    <ImageView
-        android:id="@+id/imageViewFilm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="250dp"
-        android:layout_marginRight="250dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        app:srcCompat="@drawable/ic_launcher_background"
-        android:contentDescription="TODO" />
-
     <TextView
         android:id="@+id/textViewNomFilm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
-        app:layout_constraintStart_toEndOf="@+id/imageViewFilm"
-        app:layout_constraintTop_toTopOf="@+id/imageViewFilm"
+        app:layout_constraintStart_toEndOf="@+id/imageViewFilmImage"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFilmImage"
         tools:text="Nom" />
 
     <TextView
@@ -42,36 +26,43 @@
         tools:text="Date" />
 
     <TextView
-        android:id="@+id/textViewParution"
+        android:id="@+id/textViewPopularite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/textViewNomFilm"
         app:layout_constraintStart_toStartOf="@+id/textViewNomFilm"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate"
-        tools:text="Casting" />
+        tools:text="popularite" />
 
     <TextView
         android:id="@+id/textViewGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewFilm"
         app:layout_constraintEnd_toEndOf="@+id/textViewNomFilm"
         app:layout_constraintStart_toStartOf="@+id/textViewNomFilm"
-        app:layout_constraintTop_toBottomOf="@+id/textViewParution"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPopularite"
         tools:text="Genre" />
 
     <ImageButton
         android:id="@+id/imageButtonLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewFilm"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewFilmImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toEndOf="@+id/imageViewFilm"
-        app:layout_constraintTop_toTopOf="@+id/imageViewFilm"
-        app:layout_constraintVertical_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/textViewPopularite"
+        app:layout_constraintTop_toTopOf="@+id/imageViewFilmImage"
         app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <ImageView
+        android:id="@+id/imageViewFilmImage"
+        android:layout_width="192dp"
+        android:layout_height="132dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/image" />
 </androidx.constraintlayout.widget.ConstraintLayout>

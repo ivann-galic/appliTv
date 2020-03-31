@@ -1,4 +1,4 @@
-/*
+
 package com.ivann.applicationtvgoodgit;
 
 
@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +40,14 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Film film = films.get(position);
 
-        holder.filmImage.setImageResource(film.filmImage);
-        holder.titre.setText(film.);
-        holder.date.setText(film.);
-        holder.casting.setText(film.);
-        holder.genre.setText(film.);
-        holder.like.setBottom(film.);
+    String image = String.valueOf(Picasso.get().load(film.filmImage));
+
+        holder.filmImage.setImageResource(Integer.parseInt(image));
+        holder.titre.setText(film.titre);
+        holder.date.setText(film.dateSortie);
+        holder.popularite.setText(holder.popularite.toString());
+        holder.genre.setText(film.Genre);
+        //holder.like.setBottom(film.);
 
         }
 
@@ -71,17 +75,17 @@ class ViewHolder extends RecyclerView.ViewHolder{
     final Button like;
     final TextView titre;
     final TextView date;
-    final TextView casting;
+    final TextView popularite;
     final TextView genre;
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
-        filmImage = itemView.findViewById(R.id.imageViewFilm);
+        filmImage = itemView.findViewById(R.id.imageViewFilmImage);
         titre = itemView.findViewById(R.id.textViewNomFilm);
         date = itemView.findViewById(R.id.textViewDate);
-        casting = itemView.findViewById(R.id.textViewCasting);
+        popularite = itemView.findViewById(R.id.textViewPopularite);
         genre = itemView.findViewById(R.id.textViewGenre);
         like = itemView.findViewById(R.id.imageButtonLike);
     }
 }
-}*/
+}
