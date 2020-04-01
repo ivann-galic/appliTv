@@ -42,9 +42,9 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Film film = filmList.get(position);
 
- Picasso.get().load(filmList.get(position).filmImage);
+ Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage);
 
-        Picasso.get().load(filmList.get(position).filmImage).into(holder.filmImage);
+        Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage).into(holder.filmImage);
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(holder.popularite.toString());

@@ -13,19 +13,48 @@ Il est parcelisé pour pourvoir passer d'une vue à l'autre. Pour l'instant, pas
  */
 public class Film implements Parcelable  {
     @SerializedName("id")
-    public final int idFilm;
+    public  int idFilm;
     @SerializedName("poster_path")
-    public final String filmImage;
+    public  String filmImage;
+
+    public void setIdFilm(int idFilm) {
+        this.idFilm = idFilm;
+    }
+
+    public void setFilmImage(String filmImage) {
+        this.filmImage = filmImage;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public void setDateSortie(String dateSortie) {
+        this.dateSortie = dateSortie;
+    }
+
+    public void setGenre(ArrayList<String> genre) {
+        Genre = genre;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public void setPopularite(float popularite) {
+        this.popularite = popularite;
+    }
+
     @SerializedName("title")
-    public final String titre;
+    public String titre;
     @SerializedName("release_date")
-    public final String dateSortie;
+    public  String dateSortie;
     @SerializedName("genre_ids")
-    public final ArrayList<String> Genre;
+    public  ArrayList<String> Genre;
     @SerializedName("overview")
-    public final String resume;
+    public  String resume;
     @SerializedName("popularity")
-    public final float popularite;
+    public float popularite;
 
     //----------------------- CONSTRUCTOR----------------------------------//
     protected Film(Parcel in) {

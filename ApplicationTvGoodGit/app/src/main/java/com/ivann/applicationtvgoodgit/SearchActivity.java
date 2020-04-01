@@ -150,6 +150,18 @@ public class SearchActivity extends AppCompatActivity {
 
                 List<Film> filmList = response.body().results;
 
+                // je boucle pour récuperer tous les films
+                // je fais chercher url dans film image
+                // concat
+                // set le nouvelle url dans l'objet la nouvelle url
+                // remettre dans une liste de films
+
+
+
+
+
+
+
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                 intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                 startActivity(intent);
