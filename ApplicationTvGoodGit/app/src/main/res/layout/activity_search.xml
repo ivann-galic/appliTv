@@ -52,4 +52,225 @@
         app:layout_constraintStart_toEndOf="@+id/textViewSearchTitle"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/popcorn" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewFilter"
+        android:layout_width="326dp"
+        android:layout_height="223dp"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFilter">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".SearchActivity">
+
+            <RadioGroup
+                android:id="@+id/RadioGroupFilter"
+                android:layout_width="195dp"
+                android:layout_height="129dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radioButtonTitre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Titre" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Date de sortie" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonGenre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Genre" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonPopularite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Popularité" />
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewGenres"
+        android:layout_width="322dp"
+        android:layout_height="413dp"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFilter">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".SearchActivity">
+
+            <RadioGroup
+                android:id="@+id/RadioGroupGenre1"
+                android:layout_width="138dp"
+                android:layout_height="329dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.138"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonCloseGenres">
+
+                <RadioButton
+                    android:id="@+id/radioButtonAction"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Action" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonAnimation"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Animation" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonCrime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Crime" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonDrame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Drame" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonFantastique"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fantastique" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonHorreur"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Horreur" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonMystère"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mystère" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonScienceFiction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Science-fiction" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonThriller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thriller" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonWestern"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Western" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/RadioGroupGenre2"
+                android:layout_width="142dp"
+                android:layout_height="324dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toEndOf="@+id/RadioGroupGenre1"
+                app:layout_constraintTop_toBottomOf="@+id/imageButtonCloseGenres">
+
+                <RadioButton
+                    android:id="@+id/radioButtonAventure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aventure" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonComedie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comédie" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonDocumentaire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Documentaire" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonFamilial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Familial" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonHistoire"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Histoire" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonMusique"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Musique" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonRomance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Romance" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonTelefilm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Téléfilm" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonGuerre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Guerre" />
+            </RadioGroup>
+
+            <ImageButton
+                android:id="@+id/imageButtonCloseGenres"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/close" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

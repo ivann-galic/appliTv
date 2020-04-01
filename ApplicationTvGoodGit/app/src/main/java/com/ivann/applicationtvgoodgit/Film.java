@@ -13,17 +13,17 @@ public class Film implements Parcelable  {
     public final String filmImage;
     public final String titre;
     public final String dateSortie;
-    public final int idGenre;
+    public final String Genre;
     public final String resume;
     public final float popularite;
 
 // ----------------------------------- CONSTRUCTEUR ---------------------------------------------------------------------- //
-    public Film(int idFilm, String filmImage, String titre, String dateSortie, int idGenre, String resume, float popularite) {
+    public Film(int idFilm, String filmImage, String titre, String dateSortie, String Genre, String resume, float popularite) {
         this.idFilm = idFilm;
         this.filmImage = filmImage;
         this.titre = titre;
         this.dateSortie = dateSortie;
-        this.idGenre = idGenre;
+        this.Genre = Genre;
         this.resume = resume;
         this.popularite = popularite;
     }
@@ -35,7 +35,7 @@ public class Film implements Parcelable  {
         filmImage = in.readString();
         titre = in.readString();
         dateSortie = in.readString();
-        idGenre = in.readInt();
+        Genre = in.readString();
         resume = in.readString();
         popularite = in.readFloat();
     }
@@ -63,7 +63,7 @@ public class Film implements Parcelable  {
         parcel.writeString(filmImage);
         parcel.writeString(titre);
         parcel.writeString(dateSortie);
-        parcel.writeInt(idGenre);
+        parcel.writeString(Genre);
         parcel.writeString(resume);
         parcel.writeFloat(popularite);
     }
@@ -87,8 +87,8 @@ public class Film implements Parcelable  {
         return dateSortie;
     }
 
-    public int getIdGenre() {
-        return idGenre;
+    public String getGenre() {
+        return Genre;
     }
 
     public String getResume() {
@@ -99,5 +99,16 @@ public class Film implements Parcelable  {
         return popularite;
     }
 
-
+    @Override
+    public String toString() {
+        return "Film{" +
+                "idFilm=" + idFilm +
+                ", filmImage='" + filmImage + '\'' +
+                ", titre='" + titre + '\'' +
+                ", dateSortie='" + dateSortie + '\'' +
+                ", Genre=" + Genre +
+                ", resume='" + resume + '\'' +
+                ", popularite=" + popularite +
+                '}';
+    }
 }

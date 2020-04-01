@@ -45,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
                 goToAbout();
             }
         });
+
+        final TextView textViewTest = findViewById(R.id.textViewTest);
+        textViewTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToTest();
+            }
+        });
     }
 
     private void goToCollections() {
@@ -65,5 +73,10 @@ public class MainActivity extends AppCompatActivity {
     private void goToAbout() {
         final Intent intentAbout = new Intent(this, AboutActivity.class);
         startActivity(intentAbout);
+    }
+
+    private void goToTest() {
+        final Intent intentTest = new Intent(this, FocusFilmActivity.class);
+        startActivity(intentTest);
     }
 }
