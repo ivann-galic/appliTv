@@ -207,7 +207,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     System.out.println(filmList.get(3).toString());
 
-                    Intent intent = new Intent(SearchActivity.this, FocusFilmActivity.class);
+                    Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                     intent.putExtra("FilmList", filmList);
                     startActivity(intent);
 
