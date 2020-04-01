@@ -132,13 +132,14 @@ public class SearchActivity extends AppCompatActivity {
         // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
         filmDbApi service = retrofit.create(filmDbApi.class);
 
-        // utilisation du service
-        //Call searchedMovies =//
-        Call<SearchWrapper> callJson = service.searchMovies("d0f80747d8ac43db918936f4a3d09e9c", "fr", "popularity.desc", 1);
-        //SearchWrapper body =
 
-        // on execute la requete
-        callJson.enqueue(new Callback<SearchWrapper>() {
+        // utilisation d'un des services => ici test avec trois services
+        Call<SearchWrapper> callJson = service.searchMovies("d0f80747d8ac43db918936f4a3d09e9c", "fr", "popularity.desc", 1);
+        Call<SearchWrapper> callJson2 = service.secarhMyMovies("d0f80747d8ac43db918936f4a3d09e9c", "fr", "star", 1);
+        String jordan = "space"; // recherche pour trouver space jam
+        Call<SearchWrapper> callJson3 = service.searchMoviesTest("d0f80747d8ac43db918936f4a3d09e9c","fr",jordan,1);
+
+        callJson3.enqueue(new Callback<SearchWrapper>() {
 
             @Override
             public void onFailure(Call<SearchWrapper> call, Throwable t) {
@@ -149,15 +150,6 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
 
                 List<Film> filmList = response.body().results;
-
-                // je boucle pour récuperer tous les films
-                // je fais chercher url dans film image
-                // concat
-                // set le nouvelle url dans l'objet la nouvelle url
-                // remettre dans une liste de films
-
-
-
 
 
 
@@ -211,17 +203,10 @@ public class SearchActivity extends AppCompatActivity {
 
                 });
                 Log.i("Mainactivity", "la liste de sfilms est = " + filmList.toString() );
-               /* // l'intent permet de btranférer des informations de notre classe à ListFilmactivity
-                Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                intent.putParcelableArrayListExtra("f")
 
-
-                        ("FilmList", (Parcelable) filmList);
-                startActivity(intent);*/
 
                 // log d etest pour voir si cela a marché
                 Log.i("MainActivity", "la list de sfilms " + filmList.toString());
-                // System.out.println(film1.getString("title"));
 
             }
         });

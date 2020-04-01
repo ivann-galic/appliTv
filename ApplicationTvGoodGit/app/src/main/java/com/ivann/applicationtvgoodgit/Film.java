@@ -16,35 +16,6 @@ public class Film implements Parcelable  {
     public  int idFilm;
     @SerializedName("poster_path")
     public  String filmImage;
-
-    public void setIdFilm(int idFilm) {
-        this.idFilm = idFilm;
-    }
-
-    public void setFilmImage(String filmImage) {
-        this.filmImage = filmImage;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public void setDateSortie(String dateSortie) {
-        this.dateSortie = dateSortie;
-    }
-
-    public void setGenre(ArrayList<String> genre) {
-        Genre = genre;
-    }
-
-    public void setResume(String resume) {
-        this.resume = resume;
-    }
-
-    public void setPopularite(float popularite) {
-        this.popularite = popularite;
-    }
-
     @SerializedName("title")
     public String titre;
     @SerializedName("release_date")
@@ -99,6 +70,33 @@ public class Film implements Parcelable  {
     }
 
 
+    public void setIdFilm(int idFilm) {
+        this.idFilm = idFilm;
+    }
+
+    public void setFilmImage(String filmImage) {
+        this.filmImage = filmImage;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public void setDateSortie(String dateSortie) {
+        this.dateSortie = dateSortie;
+    }
+
+    public void setGenre(ArrayList<String> genre) {
+        Genre = genre;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public void setPopularite(float popularite) {
+        this.popularite = popularite;
+    }
 
 
 // ------------------- PARCEL METHODES -----------------------------------//
