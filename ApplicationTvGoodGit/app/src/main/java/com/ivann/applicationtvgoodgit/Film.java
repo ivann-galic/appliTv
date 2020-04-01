@@ -3,74 +3,44 @@ package com.ivann.applicationtvgoodgit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
 /*
 cette classe permet de créer l'objet film à partir des données récupérées sur les api.
 Il est parcelisé pour pourvoir passer d'une vue à l'autre. Pour l'instant, pas de casting, ni de real.
  */
 public class Film implements Parcelable  {
-
+    @SerializedName("id")
     public final int idFilm;
+    @SerializedName("poster_path")
     public final String filmImage;
+    @SerializedName("title")
     public final String titre;
+    @SerializedName("release_date")
     public final String dateSortie;
-    public final String Genre;
+    @SerializedName("genre_ids")
+    public final ArrayList<String> Genre;
+    @SerializedName("overview")
     public final String resume;
+    @SerializedName("popularity")
     public final float popularite;
 
-// ----------------------------------- CONSTRUCTEUR ---------------------------------------------------------------------- //
-    public Film(int idFilm, String filmImage, String titre, String dateSortie, String Genre, String resume, float popularite) {
-        this.idFilm = idFilm;
-        this.filmImage = filmImage;
-        this.titre = titre;
-        this.dateSortie = dateSortie;
-        this.Genre = Genre;
-        this.resume = resume;
-        this.popularite = popularite;
-    }
-
-// ----------------------------------- PARCELISATION ---------------------------------------------------------------------- //
-
+    //----------------------- CONSTRUCTOR----------------------------------//
     protected Film(Parcel in) {
         idFilm = in.readInt();
         filmImage = in.readString();
         titre = in.readString();
         dateSortie = in.readString();
-        Genre = in.readString();
+        Genre = in.createStringArrayList();
         resume = in.readString();
         popularite = in.readFloat();
     }
 
-    public static final Creator<Film> CREATOR = new Creator<Film>() {
-        @Override
-        public Film createFromParcel(Parcel in) {
-            return new Film(in);
-        }
-
-        @Override
-        public Film[] newArray(int size) {
-            return new Film[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(idFilm);
-        parcel.writeString(filmImage);
-        parcel.writeString(titre);
-        parcel.writeString(dateSortie);
-        parcel.writeString(Genre);
-        parcel.writeString(resume);
-        parcel.writeFloat(popularite);
-    }
 
 
-
- //--------------------------------- GETTERS----------------------------------------------------//
+    //--------------------- GETTERS AND SETTERS--------------------------------//
     public int getIdFilm() {
         return idFilm;
     }
@@ -87,7 +57,7 @@ public class Film implements Parcelable  {
         return dateSortie;
     }
 
-    public String getGenre() {
+    public ArrayList<String> getGenre() {
         return Genre;
     }
 
@@ -99,16 +69,39 @@ public class Film implements Parcelable  {
         return popularite;
     }
 
+
+
+
+// ------------------- PARCEL METHODES -----------------------------------//
+
+
+
+    public static final Creator<Film> CREATOR = new Creator<Film>() {
+        @Override
+        public Film createFromParcel(Parcel in) {
+            return new Film(in);
+        }
+
+        @Override
+        public Film[] newArray(int size) {
+            return new Film[size];
+        }
+    };
+
+
     @Override
-    public String toString() {
-        return "Film{" +
-                "idFilm=" + idFilm +
-                ", filmImage='" + filmImage + '\'' +
-                ", titre='" + titre + '\'' +
-                ", dateSortie='" + dateSortie + '\'' +
-                ", Genre=" + Genre +
-                ", resume='" + resume + '\'' +
-                ", popularite=" + popularite +
-                '}';
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idFilm);
+        dest.writeString(filmImage);
+        dest.writeString(titre);
+        dest.writeString(dateSortie);
+        dest.writeStringList(Genre);
+        dest.writeString(resume);
+        dest.writeFloat(popularite);
     }
 }
