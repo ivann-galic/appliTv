@@ -3,6 +3,7 @@ package com.ivann.applicationtvgoodgit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -149,13 +150,16 @@ public class SearchActivity extends AppCompatActivity {
 
                 List<Film> filmList = response.body().results;
 
+                Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
+                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                startActivity(intent);
 // ------------------------------------- jusqu'ici y'a une liste=> code a revoir apres ---------------------//
 
 
                 final CardView cardViewGenres = (CardView) findViewById(R.id.CardViewGenres);
                 final Button buttonFilter = findViewById(R.id.buttonFilter);
                 final CardView cardViewFilter = findViewById(R.id.CardViewFilter);
-                
+
                 // Lors d'un clic sur l'option "genre", une cardView (menu des filtres) prend la place pour afficher tous les genres.
                 buttonFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -194,12 +198,14 @@ public class SearchActivity extends AppCompatActivity {
                     }
 
                 });
-
-
-                // l'intent permet de btranférer des informations de notre classe à ListFilmactivity
+                Log.i("Mainactivity", "la liste de sfilms est = " + filmList.toString() );
+               /* // l'intent permet de btranférer des informations de notre classe à ListFilmactivity
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                intent.putExtra("FilmList", filmList);
-                startActivity(intent);
+                intent.putParcelableArrayListExtra("f")
+
+
+                        ("FilmList", (Parcelable) filmList);
+                startActivity(intent);*/
 
                 // log d etest pour voir si cela a marché
                 Log.i("MainActivity", "la list de sfilms " + filmList.toString());
