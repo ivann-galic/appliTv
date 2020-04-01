@@ -155,6 +155,7 @@ public class SearchActivity extends AppCompatActivity {
                 final CardView cardViewGenres = (CardView) findViewById(R.id.CardViewGenres);
                 final Button buttonFilter = findViewById(R.id.buttonFilter);
                 final CardView cardViewFilter = findViewById(R.id.CardViewFilter);
+                
                 // Lors d'un clic sur l'option "genre", une cardView (menu des filtres) prend la place pour afficher tous les genres.
                 buttonFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
