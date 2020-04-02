@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.ViewHolder> {
+public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.ViewHolder> implements View.OnClickListener{
 
 
 private List<Film> filmList;
@@ -40,6 +40,7 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 @Override
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Film film = filmList.get(position);
 
  Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage);
@@ -48,6 +49,8 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(holder.popularite.toString());
+    holder.itemView.setTag(film);
+    holder.itemView.setOnClickListener(this);
         //holder.genre.setText(film.Genre);
         //holder.like.setBottom(film.);
 
@@ -58,20 +61,6 @@ public int getItemCount() {
 
     return filmList.size();
         }
-
-/*@Override
-public void onClick(View v) {
-        ArrayList<Film> list;
-        Film a = (Film) v.getTag();
-        list= new ArrayList<>();
-        list.add(a);
-       // Log.i("AnswerAdapter", "onClick: " + a.filmImage);
-
-        Context context = v.getContext();
-        Intent intent = new Intent(context,MainActivity.class);
-        intent.putExtra("quizz",list);
-        context.startActivity(intent);
-        }*/
 
 public class ViewHolder extends RecyclerView.ViewHolder{
     final ImageView filmImage;
@@ -90,5 +79,14 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         genre = itemView.findViewById(R.id.textViewGenre);
 //        like = itemView.findViewById(R.id.imageButtonLike);
     }
+
 }
+    @Override
+    public void onClick(View v) {
+        Film film = (Film) v.getTag();
+        Context context = v.getContext();
+        Intent intent = new Intent(context, FocusFilmActivity.class);
+        intent.putExtra("film", film);
+        context.startActivity(intent);
+    }
 }

@@ -4,6 +4,7 @@ package com.ivann.applicationtvgoodgit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +13,9 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -35,9 +38,6 @@ public class ListFilmActivity extends AppCompatActivity {
     private FilmAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         Intent srcIntent = getIntent();
         filmList = srcIntent.getParcelableArrayListExtra("FilmList");
@@ -52,12 +52,7 @@ public class ListFilmActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewFilm);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-
-
-
     }
-
 
 }
 

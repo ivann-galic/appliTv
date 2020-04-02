@@ -2,67 +2,94 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutItemFilm"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
-
-    <TextView
-        android:id="@+id/textViewNomFilm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewFilmImage"
-        app:layout_constraintTop_toTopOf="@+id/imageViewFilmImage"
-        tools:text="Nom" />
-
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewNomFilm"
-        app:layout_constraintStart_toStartOf="@+id/textViewNomFilm"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNomFilm"
-        tools:text="Date" />
-
-    <TextView
-        android:id="@+id/textViewPopularite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/textViewNomFilm"
-        app:layout_constraintStart_toStartOf="@+id/textViewNomFilm"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate"
-        tools:text="popularite" />
+    android:layout_height="200dp"
+    android:background="#000000">
 
     <TextView
         android:id="@+id/textViewGenre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textViewNomFilm"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textViewNomFilm"
         app:layout_constraintTop_toBottomOf="@+id/textViewPopularite"
         tools:text="Genre" />
 
-    <ImageButton
-        android:id="@+id/imageButtonLike"
+    <TextView
+        android:id="@+id/textViewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewFilmImage"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPopularite"
+        app:layout_constraintEnd_toEndOf="@+id/textViewNomFilm"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textViewNomFilm"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNomFilm"
+        tools:text="Date" />
+
+    <TextView
+        android:id="@+id/textViewNomFilm"
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewPopularite"
-        app:layout_constraintTop_toTopOf="@+id/imageViewFilmImage"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:layout_constraintStart_toEndOf="@+id/imageViewFilmImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nom" />
 
     <ImageView
         android:id="@+id/imageViewFilmImage"
-        android:layout_width="192dp"
-        android:layout_height="132dp"
+        android:layout_width="115dp"
+        android:layout_height="168dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/image" />
+
+    <ImageView
+        android:id="@+id/imageViewIconPopularite"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPopularite"
+        app:layout_constraintEnd_toStartOf="@+id/textViewPopularite"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/textViewNomFilm"
+        app:layout_constraintTop_toTopOf="@+id/textViewPopularite"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/star" />
+
+    <TextView
+        android:id="@+id/textViewPopularite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textViewGenre"
+        app:layout_constraintEnd_toEndOf="@+id/textViewNomFilm"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIconPopularite"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDate"
+        tools:text="popularite" />
+
+    <ImageView
+        android:id="@+id/imageViewDivider"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#3A3A3A"
+        android:paddingLeft="5dp"
+        android:paddingTop="2dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="2dp"
+        android:scaleType="fitXY"
+        android:src="@android:drawable/divider_horizontal_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

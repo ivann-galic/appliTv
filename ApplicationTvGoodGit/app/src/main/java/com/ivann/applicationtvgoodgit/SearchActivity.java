@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -315,18 +316,17 @@ public class SearchActivity extends AppCompatActivity {
                         Log.i("MainActivity", "filmImage" + filmImage);
 
                         String titre = film1.getString("original_title");
-
-
                         String dateSortie = film1.getString("release_date");
-
-
                         String resume = film1.getString("overview");
-
-
                         JSONArray idGenre = film1.getJSONArray("genre_ids");
                         int idPremierGenre = (int) idGenre.get(0);
 
-                        float popularite = film1.getLong("popularity");
+                        long longPopularite = film1.getLong("popularity");
+                        BigDecimal bd = new BigDecimal(longPopularite);
+                        bd= bd.setScale(3,BigDecimal.ROUND_DOWN);
+                        longPopularite = bd.longValue();
+
+                        String popularite = String.valueOf(longPopularite);
 
                         filmList.add(new Film(idFilm, filmImage, titre, dateSortie, genreToString(idPremierGenre), resume, popularite));
 

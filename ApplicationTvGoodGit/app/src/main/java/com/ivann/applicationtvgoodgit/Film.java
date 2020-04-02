@@ -65,7 +65,7 @@ public class Film implements Parcelable  {
         return resume;
     }
 
-    public float getPopularite() {
+    public Float getPopularite() {
         return popularite;
     }
 

@@ -14,11 +14,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView textViewCollections = findViewById(R.id.textViewCollections);
-        textViewCollections.setOnClickListener(new View.OnClickListener() {
+        final TextView textViewFavoris = findViewById(R.id.textViewFavoris);
+        textViewFavoris.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToCollections();
+                goToFavoris();
+            }
+        });
+
+        final TextView textViewPlusTard = findViewById(R.id.textViewPlusTard);
+        textViewPlusTard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLater();
             }
         });
 
@@ -46,18 +54,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final TextView textViewTest = findViewById(R.id.textViewTest);
-        textViewTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToTest();
-            }
-        });
     }
 
-    private void goToCollections() {
-        final Intent intentCollections = new Intent(this, CollectionsActivity.class);
-        startActivity(intentCollections);
+    private void goToFavoris() {
+        final Intent intentFavoris = new Intent(this, FavorisActivity.class);
+        startActivity(intentFavoris);
+    }
+
+    private void goToLater() {
+        final Intent intentLater = new Intent(this, LaterActivity.class);
+        startActivity(intentLater);
     }
 
     private void goToSearch() {
@@ -73,10 +79,5 @@ public class MainActivity extends AppCompatActivity {
     private void goToAbout() {
         final Intent intentAbout = new Intent(this, AboutActivity.class);
         startActivity(intentAbout);
-    }
-
-    private void goToTest() {
-        final Intent intentTest = new Intent(this, FocusFilmActivity.class);
-        startActivity(intentTest);
     }
 }

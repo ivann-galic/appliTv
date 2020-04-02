@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FocusFilmActivity"></activity>
+        <activity android:name=".LaterActivity"></activity>
+        <activity android:name=".FocusFilmActivity" />
         <activity android:name=".NewFilmsActivity" />
         <activity android:name=".RecyclerActivity" />
         <activity android:name=".ListFilmActivity" />
-        <activity android:name=".CollectionsActivity" />
+        <activity android:name=".FavorisActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".SearchActivity" >
             <intent-filter>
