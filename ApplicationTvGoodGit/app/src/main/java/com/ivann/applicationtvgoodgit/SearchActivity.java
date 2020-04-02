@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchActivity extends AppCompatActivity {
-     List<Film>[] filmList;
+     List<Film> filmList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +130,10 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String searchedText = userChoice(); // recherche pour trouver space jam
-                callData(filmList,searchedText);
-                runIntent(Arrays.asList(filmList));
+                callData(searchedText);
+
+             //   runIntent(callData(searchedText));
+
             }
         });
         // Lors d'un clic sur l'option "genre", une cardView (menu des filtres) prend la place pour afficher tous les genres.
@@ -195,14 +197,14 @@ public class SearchActivity extends AppCompatActivity {
         return userChoice;
     }
 
-    private void runIntent(List filmList) {
+ /*   private void runIntent( List<Film> filmList) {
 
         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList.get(0));
+        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
         startActivity(intent);
-    }
+    }*/
 
-    private void callData(final List<Film>[] filmList, String searchedText) {
+    private void callData(String searchedText) {
 
 
         // construction d'un client apartir des données fournies par retrofit
@@ -229,17 +231,22 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
+                assert response.body() != null;
+                List<Film> filmList = response.body().results;
 
+                Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
+                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                startActivity(intent);
 
                 // CONSTITUTION DE LA LISTE DE FILMS
-               final filmList = new List[]{response.body().results};
 
 
-                Log.i("Mainactivity", "la liste de sfilms est = " + filmList[0].toString());
+
+                Log.i("Mainactivity", "la liste de sfilms est = " + filmList.get(0).toString());
 
 
                 // log d etest pour voir si cela a marché
-                Log.i("MainActivity", "la list de sfilms " + filmList[0].toString());
+                Log.i("MainActivity", "la list de sfilms " + filmList.get(0).toString());
 
 
                 //----------------------------------------------- CHANGEMENT DE VIEW (start activity)--------------------------------------/
