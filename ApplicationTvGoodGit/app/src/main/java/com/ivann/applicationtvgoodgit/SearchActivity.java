@@ -161,12 +161,46 @@ public class SearchActivity extends AppCompatActivity {
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                     RadioButton rB = findViewById(checkedId);
 
-                 int idGenre = genreStringToInt(rB.getText().toString())  ;
-                 
+                    int idGenre =  genreStringToInt(rB.getText().toString());
 
+
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("https://api.themoviedb.org/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+                    // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
+                    filmDbApi service = retrofit.create(filmDbApi.class);
+
+
+                    // utilisation d'un des services => ici test avec trois services
+                    Call<SearchWrapper> callJson4 = service.searchGenre("d0f80747d8ac43db918936f4a3d09e9c", "fr", "popularity.desc", 1,idGenre);
+
+                    callJson4.enqueue(new Callback<SearchWrapper>() {
+
+                        @Override
+                        public void onFailure(Call<SearchWrapper> call, Throwable t) {
+                            Log.e("MainActivity", "onFailure = " + t.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
+                            assert response.body() != null;
+                            List<Film> filmList = response.body().results;
+
+                            Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
+                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                            startActivity(intent);
+
+
+                        }
+                    });
                 }
 
-                private int genreStringToInt(String text) {
+
+
+                public int genreStringToInt(String text) {
                     switch (text){
                         case "Action" :
                             return 28;
@@ -269,7 +303,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     //---------------TRAITEMENT DE L'INPUT UTILISATEUR ------------------------------------//
-    private String userChoice() {
+    public String userChoice() {
 
         EditText inputUser = (EditText) findViewById(R.id.EditTextSearch);
         String userChoice = inputUser.getText().toString();

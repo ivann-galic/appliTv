@@ -37,5 +37,16 @@ cette interface prépare le srequest et le sréponses
 
 
 
+        //https://api.themoviedb.org/3/discover/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&sort_by=popularity.desc&include_adult=false&page=1&with_genres=28
+
+
+        @GET("3/discover/movie?")
+        public Call<SearchWrapper> searchGenre(
+                @Query("api_key") String apiKey,
+                @Query("language") String language,
+                @Query("sort_by") String tri,
+                @Query("page") int page,
+                @Query("with_genres") int genreId);
+
 
 }
