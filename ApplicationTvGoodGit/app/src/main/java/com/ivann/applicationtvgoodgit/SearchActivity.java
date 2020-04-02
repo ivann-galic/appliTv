@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchActivity extends AppCompatActivity {
-     List<Film> filmList;
+    List<Film> filmList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +132,7 @@ public class SearchActivity extends AppCompatActivity {
                 String searchedText = userChoice(); // recherche pour trouver space jam
                 callData(searchedText);
 
-             //   runIntent(callData(searchedText));
+                //   runIntent(callData(searchedText));
 
             }
         });
@@ -147,18 +147,91 @@ public class SearchActivity extends AppCompatActivity {
 
         // les boutons pour gérer les catégories
         final RadioGroup RadioGroupGenre1 = (RadioGroup) findViewById(R.id.RadioGroupGenre1);
-        final RadioButton radioClickedGenre1 = (RadioButton) findViewById(RadioGroupGenre1.getCheckedRadioButtonId());
-                    /*radioClickedGenre1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                        }
-                    });*/
+        final RadioButton radioClickedGenre1 = findViewById(RadioGroupGenre1.getCheckedRadioButtonId());
 
+        final RadioButton radioFilterGenre = (RadioButton) findViewById(R.id.radioButtonGenre);
         final RadioGroup RadioGroupGenre2 = (RadioGroup) findViewById(R.id.RadioGroupGenre2);
         final RadioButton radioClickedGenre2 = (RadioButton) findViewById(RadioGroupGenre2.getCheckedRadioButtonId());
-
         final RadioGroup RadioGroupFilter = (RadioGroup) findViewById(R.id.RadioGroupFilter);
-        final RadioButton radioFilterGenre = (RadioButton) findViewById(R.id.radioButtonGenre);
+
+
+
+            RadioGroupGenre1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    RadioButton rB = findViewById(checkedId);
+
+                 int idGenre = genreStringToInt(rB.getText().toString())  ;
+                 
+
+                }
+
+                private int genreStringToInt(String text) {
+                    switch (text){
+                        case "Action" :
+                            return 28;
+
+                        case "Aventure" :
+                            return 12;
+
+                        case "Animation":
+                            return 16 ;
+
+                        case "Comédie" :
+                            return 35;
+
+                        case "Crime":
+                            return 80 ;
+
+                        case "Documentaire":
+                            return 99;
+
+                        case "Drame":
+                            return 18;
+
+                        case "Familial":
+                            return 10751;
+
+                        case "Fantastique":
+                            return 14;
+
+                        case "Histoire":
+                            return 36;
+
+                        case "Horreur":
+                            return 27;
+
+                        case "Musique":
+                            return 10402;
+
+                        case "Mystère":
+                            return 9648;
+
+                        case "Romance":
+                            return 10749;
+
+                        case "Science-fiction":
+                            return 878;
+
+                        case "Téléfilm":
+                            return 10770;
+
+                        case "Thriller":
+                            return 53 ;
+
+                        case "Guerre":
+                            return 10752;
+
+                        case "Western":
+                            return 37 ;
+
+                        default:
+                            return 0;
+                    }
+
+                }
+            });
+
 
 
         // Lors d'un clic sur le bouton fermer (croix), une cardView prend la place pour afficher de nouveau
@@ -186,6 +259,13 @@ public class SearchActivity extends AppCompatActivity {
 
 
     }
+
+    private String getRadioButtonString(RadioButton radioClickedGenre1) {
+        String radioButtonString = radioClickedGenre1.getText().toString();
+        return  radioButtonString;
+    }
+
+
 
 
     //---------------TRAITEMENT DE L'INPUT UTILISATEUR ------------------------------------//
@@ -219,7 +299,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // utilisation d'un des services => ici test avec trois services
         Call<SearchWrapper> callJson = service.searchCategory("d0f80747d8ac43db918936f4a3d09e9c", "fr", "popularity.desc", 1);
-
+        Call<SearchWrapper> callJson2 = service.searchMovies("d0f80747d8ac43db918936f4a3d09e9c", "fr", searchedText, 1);
         Call<SearchWrapper> callJson3 = service.searchMovies("d0f80747d8ac43db918936f4a3d09e9c", "fr", searchedText, 1);
 
         callJson3.enqueue(new Callback<SearchWrapper>() {
