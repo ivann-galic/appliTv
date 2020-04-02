@@ -21,19 +21,19 @@ public class FocusFilmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_focus_film);
 
         Intent srcIntent = getIntent();
-        final ArrayList <Film> filmList = srcIntent.getParcelableArrayListExtra("FilmList");
+        final Film film = srcIntent.getParcelableExtra("film");
 
-        Log.i("FocusActivity", "la list des films " + filmList);
+        Log.i("FocusActivity", "la list des films " + film);
 
         final TextView textViewTitle = findViewById(R.id.textViewTitle);
-        textViewTitle.setText(filmList.get(0).titre);
+        textViewTitle.setText(film.titre);
         final TextView textViewParution = findViewById(R.id.textViewParution);
-         textViewParution.setText(filmList.get(0).dateSortie);
+         textViewParution.setText(film.dateSortie);
         final TextView textViewResume = findViewById(R.id.textViewResume);
-      textViewResume.setText(filmList.get(0).resume);
+        textViewResume.setText(film.resume);
         ImageView imageViewPoster = findViewById(R.id.imageViewPoster);
-        Picasso.get().load(filmList.get(0).filmImage).into(imageViewPoster);// utilisation de la lib Picasso qui permet de choper une image via url ultra simplement
+        Picasso.get().load("https://image.tmdb.org/t/p/original" + film.filmImage).into(imageViewPoster);// utilisation de la lib Picasso qui permet de choper une image via url ultra simplement
         final TextView textViewGenre = findViewById(R.id.textViewGenre);
-        textViewGenre.setText(filmList.get(0).Genre);
+        //textViewGenre.setText(filmList.get(0).Genre);
     }
 }

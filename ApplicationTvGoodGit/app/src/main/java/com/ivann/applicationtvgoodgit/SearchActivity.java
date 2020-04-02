@@ -3,9 +3,11 @@ package com.ivann.applicationtvgoodgit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,13 +22,17 @@ import org.json.JSONObject;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -37,15 +43,18 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         loadDataFromApi();
+
     }
 
 
+    /*
+    Cette fonction traduit les id_genre donnés par l'api en string exploitables pour l'affichage dans le recyclerview
+     */
+    public String genreToString(int number) {
 
-    public String genreToString(int number){
+        switch (number) {
 
-        switch (number){
-
-            case 28 :
+            case 28:
                 return "Action";
 
             case 12:
@@ -109,32 +118,54 @@ public class SearchActivity extends AppCompatActivity {
         }
 
 
-
-
-
-
     }
+    /*---------------------------------------------------GESTION API ---------------------------------------------------*/
 
     private void loadDataFromApi() {
         //    String userChoice = userchoice();
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url("https://api.themoviedb.org/3/discover/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&sort_by=popularity.desc&page=1")
+
+        // construction d'un client  apartir des données fournies par retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.themoviedb.org/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        client.newCall(request).enqueue(new Callback() {
+        // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
+        filmDbApi service = retrofit.create(filmDbApi.class);
+
+
+        // utilisation d'un des services => ici test avec trois services
+        Call<SearchWrapper> callJson = service.searchMovies("d0f80747d8ac43db918936f4a3d09e9c", "fr", "popularity.desc", 1);
+        Call<SearchWrapper> callJson2 = service.secarhMyMovies("d0f80747d8ac43db918936f4a3d09e9c", "fr", "star", 1);
+        String jordan = "space"; // recherche pour trouver space jam
+        Call<SearchWrapper> callJson3 = service.searchMoviesTest("d0f80747d8ac43db918936f4a3d09e9c","fr",jordan,1);
+
+        callJson3.enqueue(new Callback<SearchWrapper>() {
+
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.e("MainActivity", "onFailue", e);
+            public void onFailure(Call<SearchWrapper> call, Throwable t) {
+                Log.e("MainActivity", "onFailure = " + t.getMessage());
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String body = response.body().string();
+            public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
+
+                List<Film> filmList = response.body().results;
+
+
+
+
+                Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
+                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                startActivity(intent);
+// ------------------------------------- jusqu'ici y'a une liste=> code a revoir apres ---------------------//
+
+
                 final CardView cardViewGenres = (CardView) findViewById(R.id.CardViewGenres);
                 final Button buttonFilter = findViewById(R.id.buttonFilter);
                 final CardView cardViewFilter = findViewById(R.id.CardViewFilter);
-                // Lors d'un clic sur l'option "genre", une cardView prend la place pour afficher tous les genres.
+
+                // Lors d'un clic sur l'option "genre", une cardView (menu des filtres) prend la place pour afficher tous les genres.
                 buttonFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -142,6 +173,99 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 });
 
+                // les boutons pour gérer les catégories
+                final RadioGroup RadioGroupGenre1 = (RadioGroup) findViewById(R.id.RadioGroupGenre1);
+                final RadioButton radioClickedGenre1 = (RadioButton) findViewById(RadioGroupGenre1.getCheckedRadioButtonId());
+                final RadioGroup RadioGroupGenre2 = (RadioGroup) findViewById(R.id.RadioGroupGenre2);
+                final RadioButton radioClickedGenre2 = (RadioButton) findViewById(RadioGroupGenre2.getCheckedRadioButtonId());
+
+                final RadioGroup RadioGroupFilter = (RadioGroup) findViewById(R.id.RadioGroupFilter);
+                final RadioButton radioFilterGenre = (RadioButton) findViewById(R.id.radioButtonGenre);
+                // Lors d'un clic sur le bouton fermer (croix), une cardView prend la place pour afficher de nouveau
+                // les options de filtres.
+                radioFilterGenre.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RadioGroupFilter.clearCheck();
+                        cardViewFilter.setVisibility(View.INVISIBLE);
+                        cardViewGenres.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                final ImageButton buttonCloseGenres = (ImageButton) findViewById(R.id.imageButtonCloseGenres);
+                buttonCloseGenres.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        cardViewGenres.setVisibility(View.INVISIBLE);
+                        cardViewFilter.setVisibility(View.VISIBLE);
+                        RadioGroupGenre1.clearCheck();
+                        RadioGroupGenre2.clearCheck();
+                    }
+
+                });
+                Log.i("Mainactivity", "la liste de sfilms est = " + filmList.toString() );
+
+
+                // log d etest pour voir si cela a marché
+                Log.i("MainActivity", "la list de sfilms " + filmList.toString());
+
+            }
+        });
+    }
+
+
+
+
+}
+
+
+
+
+
+        // gestion de l'affichage
+
+
+        //    Log.i("MainActivity", "le body result est = +"body.results);
+
+
+
+
+
+
+
+
+        /*
+
+        // on se connecte à la bdd
+        OkHttpClient client = new OkHttpClient();
+        // on obtient une reponse
+        Request request = new Request.Builder()
+                .url("https://api.themoviedb.org/3/discover/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&sort_by=popularity.desc&page=1")
+                .build();
+
+        //on met les requetes en attente, pour éviter de bloquer la vue en cas de probleme avec l'api
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.e("MainActivity", "onFailure", e);
+            }
+            // on traite la réponse
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String body = response.body().string();
+                // gestion de l'affichage
+                final CardView cardViewGenres = (CardView) findViewById(R.id.CardViewGenres);
+                final Button buttonFilter = findViewById(R.id.buttonFilter);
+                final CardView cardViewFilter = findViewById(R.id.CardViewFilter);
+                // Lors d'un clic sur l'option "genre", une cardView (menu des filtres) prend la place pour afficher tous les genres.
+                buttonFilter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        cardViewFilter.setVisibility(View.VISIBLE);
+                    }
+                });
+
+                // les boutons pour gérer les catégories
                 final RadioGroup RadioGroupGenre1 = (RadioGroup) findViewById(R.id.RadioGroupGenre1);
                 final RadioButton radioClickedGenre1 = (RadioButton) findViewById(RadioGroupGenre1.getCheckedRadioButtonId());
                 final RadioGroup RadioGroupGenre2 = (RadioGroup) findViewById(R.id.RadioGroupGenre2);
@@ -171,17 +295,20 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 });
 
+                // gestion de la réponse de l'api => on parse la réponse (body)
                 try {
 
                     JSONObject jsonBody = new JSONObject(body);
+                    // on cherche les éléments présents dans result
                     JSONArray results = jsonBody.getJSONArray("results");
 
+                    // on créée une liste de films vide
                     ArrayList<Film> filmList = new ArrayList();
+
                     // boucle pour enregistrer les films dans une liste
 
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject film1 = results.getJSONObject(i);
-                        //JSONObject film2 = results.getJSONObject(1);
 
                         int idFilm = film1.getInt("id");
                         String filmImageUrlTronquee = film1.getString("poster_path");
@@ -189,63 +316,56 @@ public class SearchActivity extends AppCompatActivity {
                         Log.i("MainActivity", "filmImage" + filmImage);
 
                         String titre = film1.getString("original_title");
-
-
                         String dateSortie = film1.getString("release_date");
-
-
                         String resume = film1.getString("overview");
-
-
                         JSONArray idGenre = film1.getJSONArray("genre_ids");
                         int idPremierGenre = (int) idGenre.get(0);
 
-                        float popularite = film1.getLong("popularity");
+                        long longPopularite = film1.getLong("popularity");
+                        BigDecimal bd = new BigDecimal(longPopularite);
+                        bd= bd.setScale(3,BigDecimal.ROUND_DOWN);
+                        longPopularite = bd.longValue();
+
+                        String popularite = String.valueOf(longPopularite);
 
                         filmList.add(new Film(idFilm, filmImage, titre, dateSortie, genreToString(idPremierGenre), resume, popularite));
 
                     }
-                    System.out.println(filmList.get(3).toString());
 
+                    // l'intent permet de btranférer des informations de notre classe à ListFilmactivity
                     Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                     intent.putExtra("FilmList", filmList);
                     startActivity(intent);
 
-                    //Log.i("MainActivity", "resultat film1 page = 1 " + film1);
-                    // Log.i("MainActivity", "resultat film2 page = 1 " + film2);
-                    // Log.i ("MainActivity", "id du film 1 page = 1 " + idFilm);
-                    //Log.i("MainActivity","objet film : " + film.toString());
+                    // log d etest pour voir si cela a marché
                     Log.i("MainActivity", "la list de sfilms " + filmList.toString());
                     // System.out.println(film1.getString("title"));
 
-                       /* Movie movie1 = new Movie(film1.getString("title"),
-                                                film1.getString("title"),
 
-                                ))*/
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     e.getMessage();
                 }
-                //  System.out.println("je recup" + jsonArray[1]);
-                // Log.i("MainActivity", "onResponse : body=" + body);
+
+                Log.i("MainActivity", "onResponse : body=" + body);
 
                 Log.i("MainActivity", "Started HTTP REquest");
             }
-        });
-    }
+        });*/
+  //  }
 
 
-    // traitement de l'input de l'utilisateur
-/*
-        private String userChoice() {
+    //--------------- traitement de l'input de l'utilisateur ------------------------------------//
+   // private String userChoice() {
+
+
             // je recupère l'entrée de l'utilisateur
-            // bouton de validation qui appelle la requête
+       // final ImageButton buttonCloseGenres = (ImageButton) findViewById(R.id.imageButtonCloseGenres);
+       // EditText tonEdit = (EditText)findViewById(R.id.textViewSearchTitle);
 
-        });
-        */
+      //  String tonTexte = tonEdit.getText().toString();
 
+        // bouton de validation qui appelle la requête
 
-}
-
-
+//        }
