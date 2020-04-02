@@ -48,5 +48,14 @@ cette interface prépare le srequest et le sréponses
                 @Query("page") int page,
                 @Query("with_genres") int genreId);
 
+       // https://api.themoviedb.org/3/discover/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=1920
+        @GET("3/discover/movie?")
+        public Call<SearchWrapper> searchDate(
+                @Query("api_key") String apiKey,
+                @Query("language") String language,
+                @Query("sort_by") String tri,
+                @Query("page") int page,
+                @Query("primary_release_date.gte") int dateId);
+
 
 }

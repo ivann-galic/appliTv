@@ -140,9 +140,54 @@ public class SearchActivity extends AppCompatActivity {
         final RadioButton radioClickedGenre1 = findViewById(RadioGroupGenre1.getCheckedRadioButtonId());
 
         final RadioButton radioFilterGenre = (RadioButton) findViewById(R.id.radioButtonGenre);
+        final RadioButton radioFilterDate = (RadioButton) findViewById(R.id.radioButtonDate);
+
         final RadioGroup RadioGroupGenre2 = (RadioGroup) findViewById(R.id.RadioGroupGenre2);
         final RadioButton radioClickedGenre2 = (RadioButton) findViewById(RadioGroupGenre2.getCheckedRadioButtonId());
         final RadioGroup RadioGroupFilter = (RadioGroup) findViewById(R.id.RadioGroupFilter);
+
+// Tri par date du plus récent au plus vieux précision pour la date? possibilité de faire l'inverse du plus vieux au plus récent?
+        radioFilterDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("https://api.themoviedb.org/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+                    // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
+                    filmDbApi service = retrofit.create(filmDbApi.class);
+
+
+                    // utilisation d'un des services => ici test avec trois services
+                    Call<SearchWrapper> callJson = service.searchDate("d0f80747d8ac43db918936f4a3d09e9c", "fr", "release_date.desc", 1, 1900);
+
+                    callJson.enqueue(new Callback<SearchWrapper>() {
+
+                        @Override
+                        public void onFailure(Call<SearchWrapper> call, Throwable t) {
+                            Log.e("MainActivity", "onFailure = " + t.getMessage());
+                        }
+
+                        @Override
+                        public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
+                            assert response.body() != null;
+                            List<Film> filmList = response.body().results;
+
+                            Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
+                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                            startActivity(intent);
+
+
+                        }
+                    });
+                }
+
+            });
+
+
+
         radioFilterGenre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,10 +201,12 @@ public class SearchActivity extends AppCompatActivity {
         buttonCloseGenres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardViewGenres.setVisibility(View.INVISIBLE);
+               cardViewGenres.setVisibility(View.INVISIBLE);
                 cardViewFilter.setVisibility(View.VISIBLE);
-                RadioGroupGenre1.clearCheck();
-                RadioGroupGenre2.clearCheck();
+              //  RadioGroupGenre1.clearCheck();
+              //  RadioGroupGenre2.clearCheck();
+                //bug qui fait que l'appli plante quand on appuie sur la croix, fonction clearCheck vraiment nécessaire?
+                // alors qu'on supprime le tableau d'affichage ligne 159.
             }
 
         });
