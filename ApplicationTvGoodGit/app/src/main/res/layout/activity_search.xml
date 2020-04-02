@@ -7,13 +7,18 @@
     android:background="#000000"
     tools:context=".SearchActivity">
 
-    <SearchView
-        android:id="@+id/SearchViewBar"
-        android:layout_width="328dp"
-        android:layout_height="35dp"
+    <EditText
+        android:id="@+id/EditTextSearch"
+        android:layout_width="253dp"
+        android:layout_height="39dp"
         android:layout_marginTop="28dp"
         android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingLeft="7dp"
+        android:text="Rechercher..."
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonSearch"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSearchTitle" />
 
@@ -27,7 +32,7 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SearchViewBar" />
+        app:layout_constraintTop_toBottomOf="@+id/EditTextSearch" />
 
     <TextView
         android:id="@+id/textViewSearchTitle"
@@ -103,8 +108,8 @@
                     android:id="@+id/radioButtonGenre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Genre"
                     android:buttonTint="#fbe377"
+                    android:text="Genre"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />
 
@@ -151,90 +156,90 @@
                     android:layout_width="149dp"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Action"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Action" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonAnimation"
                     android:layout_width="149dp"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Animation"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Animation" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCrime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Crime"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Crime" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonDrame"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Drame"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Drame" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFantastique"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Fantastique"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Fantastique" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonHorreur"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Horreur"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Horreur" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonMystère"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Mystère"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Mystère" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonScienceFiction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Science-fiction"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Science-fiction" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonThriller"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Thriller"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Thriller" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonWestern"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Western"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Western" />
+                    android:textStyle="bold" />
 
             </RadioGroup>
 
@@ -253,81 +258,87 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Aventure"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Aventure" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonComedie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Comédie"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Comédie" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonDocumentaire"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Documentaire"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Documentaire" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFamilial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Familial"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Familial" />
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="368dp"
+                    android:layout_height="454dp"
+                    app:srcCompat="@drawable/search" />
 
                 <RadioButton
                     android:id="@+id/radioButtonHistoire"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Histoire"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Histoire" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonMusique"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Musique"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Musique" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonRomance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Romance"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Romance" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonTelefilm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Téléfilm"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Téléfilm" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioButtonGuerre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="#f53b4a"
+                    android:text="Guerre"
                     android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    android:text="Guerre" />
+                    android:textStyle="bold" />
             </RadioGroup>
 
             <ImageButton
@@ -346,5 +357,20 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/imageButtonSearch"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/EditTextSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/EditTextSearch"
+        app:layout_constraintTop_toTopOf="@+id/EditTextSearch"
+        app:srcCompat="@drawable/search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
