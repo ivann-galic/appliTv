@@ -48,7 +48,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage).into(holder.filmImage);
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
-        holder.popularite.setText(holder.popularite.toString());
+        holder.popularite.setText(film.popularite);
     holder.itemView.setTag(film);
     holder.itemView.setOnClickListener(this);
         //holder.genre.setText(film.Genre);

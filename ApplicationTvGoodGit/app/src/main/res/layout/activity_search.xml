@@ -289,12 +289,6 @@
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="368dp"
-                    android:layout_height="454dp"
-                    app:srcCompat="@drawable/search" />
-
                 <RadioButton
                     android:id="@+id/radioButtonHistoire"
                     android:layout_width="match_parent"
