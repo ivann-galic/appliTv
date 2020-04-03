@@ -1,6 +1,8 @@
 package com.ivann.applicationtvgoodgit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,45 +25,25 @@ import static com.ivann.applicationtvgoodgit.SearchActivity.transforminFilmclean
 
 public class NewFilmsActivity extends AppCompatActivity {
 
+
+    private List<Film> filmList;
+    private FilmAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_films);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
-        filmDbApi service = retrofit.create(filmDbApi.class);
+                Intent srcIntent = getIntent();
+                filmList = srcIntent.getParcelableArrayListExtra("FilmList");
+                setContentView(R.layout.activity_new_films);
+                adapter = new FilmAdapter(filmList);
 
-
-        // utilisation d'un des services => ici test avec trois services
-        Call<SearchWrapper> callJson = service.searchNowPlaying("d0f80747d8ac43db918936f4a3d09e9c", "fr",1,"FR");
-
-        callJson.enqueue(new Callback<SearchWrapper>() {
-
-            @Override
-            public void onFailure(Call<SearchWrapper> call, Throwable t) {
-                Log.e("MainActivity", "onFailure = " + t.getMessage());
+       /* for (int i=0; i<filmList.size(); i++){
+            filmList.get(i);
+        }*/
+                RecyclerView recyclerView = findViewById(R.id.recyclerViewAffiche);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                recyclerView.setAdapter(adapter);
             }
-
-            @Override
-            public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
-                assert response.body() != null;
-                List<FilmJson> filmJsonList = response.body().results;
-                List<Film> filmList = transforminFilmcleaned(filmJsonList);
-
-                Intent intent = new Intent(NewFilmsActivity.this, VoirPlusTardActivity.class);
-                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
-                startActivity(intent);
-
-            }
-        });
-    }
-
-
-
-    }
 }

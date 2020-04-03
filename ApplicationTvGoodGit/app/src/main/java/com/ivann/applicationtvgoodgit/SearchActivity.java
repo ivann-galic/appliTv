@@ -113,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    public static  List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
+    public static List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
 
         List<Film> filmList = new ArrayList<Film>();
 

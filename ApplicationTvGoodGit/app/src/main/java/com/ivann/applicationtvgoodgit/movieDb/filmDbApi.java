@@ -68,5 +68,14 @@ cette interface prépare le srequest et le sréponses
                 @Query("page") int page,
                 @Query("region") String region);
 
+        //REQUETE BIENTOT A L'AFFICHE
+        // https://api.themoviedb.org/3/movie/upcoming?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&page=1&region=FR
+        @GET("3/movie/upcoming?")
+        public Call<SearchWrapper> findFilmToCome (
+                @Query("api_key") String apiKey,
+                @Query("language") String language,
+                @Query("page") int page,
+                @Query("region") String region);
+
 
 }
