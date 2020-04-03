@@ -116,11 +116,18 @@ public class SearchActivity extends AppCompatActivity {
     public static List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
 
         List<Film> filmList = new ArrayList<Film>();
+        String genre;
 
         for (int i = 0; i < filmJsonList.size(); i++) {
             FilmJson filmJsonToModify = filmJsonList.get(i);
-            //String genreModify = filmToModify.Genre.get(0);
-            Film film = new Film(filmJsonToModify.getIdFilm(), filmJsonToModify.getFilmImage(), filmJsonToModify.getTitre(), filmJsonToModify.getDateSortie(), "genreModify", filmJsonToModify.getResume(), filmJsonToModify.getPopularite(), false, false);
+        //    Log.i("MainActivity", "le genre est " + filmJsonList.get(i).Genre.get(0));
+            if(filmJsonList.get(i).Genre.isEmpty()){
+                 genre = "genre non précisé";
+            } else {
+                 genre = Util.genreToString(Integer.parseInt(filmJsonList.get(i).Genre.get(0)));
+            }
+            
+            Film film = new Film(filmJsonToModify.getIdFilm(), filmJsonToModify.getFilmImage(), filmJsonToModify.getTitre(), filmJsonToModify.getDateSortie(), genre, filmJsonToModify.getResume(), filmJsonToModify.getPopularite(), false, false);
             filmList.add(film);
         }
         return filmList;

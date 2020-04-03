@@ -65,7 +65,7 @@ public class FocusFilmActivity extends AppCompatActivity {
         ImageView imageViewPoster = findViewById(R.id.imageViewPoster);
         Picasso.get().load("https://image.tmdb.org/t/p/original" + film.filmImage).into(imageViewPoster);// utilisation de la lib Picasso qui permet de choper une image via url ultra simplement
         final TextView textViewGenre = findViewById(R.id.textViewGenre);
-        //textViewGenre.setText(filmList.get(0).Genre);
+        textViewGenre.setText(film.Genre);
     }
 
     private void onFavoriteClicked() {
