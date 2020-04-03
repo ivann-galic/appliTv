@@ -68,5 +68,5 @@ cette interface prépare le srequest et le sréponses
                 @Query("page") int page,
                 @Query("region") String region);
 
-        
+
 }
