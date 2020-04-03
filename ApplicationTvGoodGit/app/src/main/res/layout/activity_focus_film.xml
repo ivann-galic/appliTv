@@ -19,17 +19,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Titre"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
-
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="20dp"
@@ -61,13 +50,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="407dp"
-        android:layout_height="358dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+        app:layout_constraintTop_toBottomOf="@+id/imageButton">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,29 +65,50 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/textViewParution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:text="Date de sortie" />
 
             <TextView
                 android:id="@+id/textViewGenre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:text="Genre" />
+
+            <TextView
+                android:id="@+id/textViewPopularite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Popularité" />
 
             <TextView
                 android:id="@+id/textViewResume"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:justificationMode="inter_word"
                 android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:text="Résumé" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

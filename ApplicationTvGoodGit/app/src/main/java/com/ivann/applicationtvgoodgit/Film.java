@@ -135,10 +135,12 @@ public class Film implements Parcelable  {
         dest.writeString(dateSortie);
         dest.writeStringList(Genre);
         dest.writeString(resume);
-        String separator =".";
-        int i = popularite.lastIndexOf(separator);
-        String v = popularite.substring(0,i);
-        popularite = v;
+        if (popularite.contains(".")) {
+            String separator =".";
+            int i = popularite.lastIndexOf(separator);
+            String v = popularite.substring(0,i);
+            popularite = v;
+        }
         Log.i("SearchA", "popularite après sub: " + popularite);
 
 /*        long longPopularite = Long.parseLong(popularite);
