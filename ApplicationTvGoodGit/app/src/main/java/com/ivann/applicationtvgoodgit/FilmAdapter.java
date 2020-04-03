@@ -76,6 +76,7 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         popularite = itemView.findViewById(R.id.textViewPopularite);
         genre = itemView.findViewById(R.id.textViewGenre);
 //        like = itemView.findViewById(R.id.imageButtonLike);
+
     }
 
 }

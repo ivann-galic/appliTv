@@ -12,21 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LaterActivity"></activity>
+        <activity android:name=".VoirPlusTardActivity"></activity>
+        <activity android:name=".LaterActivity" />
         <activity android:name=".FocusFilmActivity" />
         <activity android:name=".NewFilmsActivity" />
         <activity android:name=".RecyclerActivity" />
         <activity android:name=".ListFilmActivity" />
         <activity android:name=".FavorisActivity" />
         <activity android:name=".AboutActivity" />
-        <activity android:name=".SearchActivity" >
+        <activity android:name=".SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@layout/activity_search"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@layout/activity_search" />
         </activity>
-    <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
