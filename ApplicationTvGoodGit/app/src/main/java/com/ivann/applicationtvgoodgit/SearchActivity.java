@@ -86,14 +86,15 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                 assert response.body() != null;
                 List<Film> filmList = response.body().results;
+                List<FilmCleaned> filmCleanedList = new ArrayList<FilmCleaned>();
 
                 for(int i = 0; i < filmList.size(); i ++){
                     Film filmToModify = filmList.get(i);
                     String genreModify = filmToModify.Genre.get(0);
-                   // int populariteModify = parseInt(filmToModify.popularite);
-                //    Log.i("SearchActivity", "id" + filmToModify.getIdFilm() + filmToModify.getFilmImage() + filmToModify.getTitre() + filmToModify.getDateSortie() + genreModify + filmToModify.getResume() + populariteModify);
                     FilmCleaned  filmCleaned = new FilmCleaned(filmToModify.getIdFilm(), filmToModify.getFilmImage(), filmToModify.getTitre(),filmToModify.getDateSortie(), genreModify, filmToModify.getResume(),filmToModify.getPopularite(),false,false);
+                    filmCleanedList.add(filmCleaned);
 
+                    Log.i("Search", "coucou c 'ets moi");
                 }
 
                 // fonction convert film in filmCleaned
