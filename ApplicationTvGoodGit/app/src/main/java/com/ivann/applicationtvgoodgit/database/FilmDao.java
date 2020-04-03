@@ -11,7 +11,7 @@ import java.util.List;
 public interface FilmDao {
 
     @Insert
-    void insertFilm(Film film);
+    void insertFilm(FilmCleaned film);
 
     //@Query("DELETE FROM film WHERE idFilm = ...")
     //List<Film> delFilm();

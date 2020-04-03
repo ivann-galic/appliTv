@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 
+import com.ivann.applicationtvgoodgit.movieDb.FilmJson;
+import com.ivann.applicationtvgoodgit.movieDb.filmDbApi;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -86,23 +88,23 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                 assert response.body() != null;
-                List<Film> filmList = response.body().results;
+                List<FilmJson> filmJsonList = response.body().results;
 
-                List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
+                List<Film> filmList =  transforminFilmcleaned(filmJsonList);
 
 
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
+                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                 startActivity(intent);
 
                 // CONSTITUTION DE LA LISTE DE FILMS
 
 
-                Log.i("Mainactivity", "la liste de sfilms est = " + filmList.get(0).toString());
+                Log.i("Mainactivity", "la liste de sfilms est = " + filmJsonList.get(0).toString());
 
 
                 // log d etest pour voir si cela a marché
-                Log.i("MainActivity", "la list de sfilms " + filmList.get(0).toString());
+                Log.i("MainActivity", "la list de sfilms " + filmJsonList.get(0).toString());
 
 
                 //----------------------------------------------- CHANGEMENT DE VIEW (start activity)--------------------------------------/
@@ -111,18 +113,17 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private  List<FilmCleaned> transforminFilmcleaned(  List<Film> filmList) {
+    private  List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
 
-        List<FilmCleaned> filmCleanedList = new ArrayList<FilmCleaned>();
+        List<Film> filmList = new ArrayList<Film>();
 
-        for (int i = 0; i < filmList.size(); i++) {
-            Film filmToModify = filmList.get(i);
-            String genreModify = filmToModify.Genre.get(0);
-            FilmCleaned filmCleaned = new FilmCleaned(filmToModify.getIdFilm(), filmToModify.getFilmImage(), filmToModify.getTitre(), filmToModify.getDateSortie(), genreModify, filmToModify.getResume(), filmToModify.getPopularite(), false, false);
-            filmCleanedList.add(filmCleaned);
-
+        for (int i = 0; i < filmJsonList.size(); i++) {
+            FilmJson filmJsonToModify = filmJsonList.get(i);
+            //String genreModify = filmToModify.Genre.get(0);
+            Film film = new Film(filmJsonToModify.getIdFilm(), filmJsonToModify.getFilmImage(), filmJsonToModify.getTitre(), filmJsonToModify.getDateSortie(), "genreModify", filmJsonToModify.getResume(), filmJsonToModify.getPopularite(), false, false);
+            filmList.add(film);
         }
-        return filmCleanedList;
+        return filmList;
     }
 
 
@@ -194,11 +195,11 @@ public class SearchActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                             assert response.body() != null;
-                            List<Film> filmList = response.body().results;
-                            List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
+                            List<FilmJson> filmJsonList = response.body().results;
+                            List<Film> filmList =  transforminFilmcleaned(filmJsonList);
 
                             Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
+                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                             startActivity(intent);
 
 
@@ -261,14 +262,14 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                         assert response.body() != null;
-                        List<Film> filmList = response.body().results;
-                        List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
+                        List<FilmJson> filmJsonList = response.body().results;
+                        List<Film> filmList =  transforminFilmcleaned(filmJsonList);
 
 
 
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
+                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                         startActivity(intent);
 
                     }
@@ -307,13 +308,13 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                         assert response.body() != null;
-                        List<Film> filmList = response.body().results;
+                        List<FilmJson> filmJsonList = response.body().results;
 
-                        List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
+                        List<Film> filmList =  transforminFilmcleaned(filmJsonList);
 
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
+                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                         startActivity(intent);
                     }
                 });

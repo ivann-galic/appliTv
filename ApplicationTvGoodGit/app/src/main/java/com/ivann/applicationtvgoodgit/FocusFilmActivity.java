@@ -3,8 +3,6 @@ package com.ivann.applicationtvgoodgit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class FocusFilmActivity extends AppCompatActivity {
 

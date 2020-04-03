@@ -1,8 +1,7 @@
-/*package com.ivann.applicationtvgoodgit;
-
+package com.ivann.applicationtvgoodgit;
 import android.app.Application;
-
 import androidx.room.Room;
+import com.ivann.applicationtvgoodgit.database.AppDatabase;
 
 public class App extends Application {
 
@@ -15,4 +14,4 @@ public class App extends Application {
                 .allowMainThreadQueries()
                 .build();
     }
-}*/
+}

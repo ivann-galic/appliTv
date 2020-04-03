@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,16 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.ViewHolder> implements View.OnClickListener{
 
 
-private List<FilmCleaned> filmCleaned;
+private List<Film> film;
 
-public FilmAdapter(List<FilmCleaned> filmCleaned) {
-        this.filmCleaned = filmCleaned;
+public FilmAdapter(List<Film> film) {
+        this.film = film;
         }
 
 @NonNull
@@ -41,11 +39,11 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 @Override
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        FilmCleaned film = filmCleaned.get(position);
+        Film film = this.film.get(position);
 
- Picasso.get().load("https://image.tmdb.org/t/p/original"+filmCleaned.get(position).filmImage);
+ Picasso.get().load("https://image.tmdb.org/t/p/original"+ this.film.get(position).filmImage);
 
-        Picasso.get().load("https://image.tmdb.org/t/p/original"+filmCleaned.get(position).filmImage).into(holder.filmImage);
+        Picasso.get().load("https://image.tmdb.org/t/p/original"+ this.film.get(position).filmImage).into(holder.filmImage);
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(film.popularite);
@@ -59,7 +57,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 @Override
 public int getItemCount() {
 
-    return filmCleaned.size();
+    return film.size();
         }
 
 public class ViewHolder extends RecyclerView.ViewHolder{

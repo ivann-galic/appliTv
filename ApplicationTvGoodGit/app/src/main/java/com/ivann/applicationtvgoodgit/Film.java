@@ -3,118 +3,86 @@ package com.ivann.applicationtvgoodgit;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 /*
 cette classe permet de créer l'objet film à partir des données récupérées sur les api.
 Il est parcelisé pour pourvoir passer d'une vue à l'autre. Pour l'instant, pas de casting, ni de real.
  */
-
 @Entity
-public class Film implements Parcelable  {
+public class Film implements Parcelable {
     @PrimaryKey
-    @SerializedName("id")
-    public  int idFilm;
-    @SerializedName("poster_path")
-    public  String filmImage;
-    @SerializedName("title")
+    public int idDb;
+    public int idFilm;
+    public String filmImage;
     public String titre;
-    @SerializedName("release_date")
-    public  String dateSortie;
-    @SerializedName("genre_ids")
-    public  ArrayList<String> Genre;
-    @SerializedName("overview")
-    public  String resume;
-    @SerializedName("popularity")
+    public String dateSortie;
+    public String Genre;
+    public String resume;
     public String popularite;
+    public boolean isFavorite = false;
+    public boolean watchListed = false;
 
-    Film(){
+    /*Film(){
 
+    }*/
+
+
+    public Film(int idFilm, String filmImage, String titre, String dateSortie, String genre, String resume, String popularite, boolean isFavorite, boolean watchListed) {
+        this.idFilm = idFilm;
+        this.filmImage = filmImage;
+        this.titre = titre;
+        this.dateSortie = dateSortie;
+        this.Genre = genre;
+        this.resume = resume;
+        this.popularite = popularite;
+        this.isFavorite = isFavorite;
+        this.watchListed = watchListed;
     }
 
-    //----------------------- CONSTRUCTOR----------------------------------//
     protected Film(Parcel in) {
         idFilm = in.readInt();
         filmImage = in.readString();
         titre = in.readString();
         dateSortie = in.readString();
-        Genre = in.createStringArrayList();
+        Genre = in.readString();
         resume = in.readString();
         popularite = in.readString();
+        isFavorite = in.readByte() != 0;
+        watchListed = in.readByte() != 0;
     }
 
+    public Film() {
 
-
-    //--------------------- GETTERS AND SETTERS--------------------------------//
-
-
-
-    public int getIdFilm() {
-        return idFilm;
     }
 
-    public String getFilmImage() {
-        return filmImage;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(idFilm);
+        dest.writeString(filmImage);
+        dest.writeString(titre);
+        dest.writeString(dateSortie);
+        dest.writeString(Genre);
+        dest.writeString(resume);
+        if (popularite.contains(".")) {
+            String separator =".";
+            int i = popularite.lastIndexOf(separator);
+            String v = popularite.substring(0,i);
+            popularite = v;
+        }
+        dest.writeString(popularite);
+        dest.writeByte((byte) (isFavorite ? 1 : 0));
+        dest.writeByte((byte) (watchListed ? 1 : 0));
     }
 
-    public String getTitre() {
-        return titre;
+    @Override
+    public int describeContents() {
+        return 0;
     }
-
-    public String getDateSortie() {
-        return dateSortie;
-    }
-
-    public ArrayList<String> getGenre() {
-        return Genre;
-    }
-
-    public String getResume() {
-        return resume;
-    }
-
-    public String getPopularite() {
-        return popularite;
-    }
-
-
-    public void setIdFilm(int idFilm) {
-        this.idFilm = idFilm;
-    }
-
-    public void setFilmImage(String filmImage) {
-        this.filmImage = filmImage;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public void setDateSortie(String dateSortie) {
-        this.dateSortie = dateSortie;
-    }
-
-    public void setGenre(ArrayList<String> genre) {
-        Genre = genre;
-    }
-
-    public void setResume(String resume) {
-        this.resume = resume;
-    }
-
-    public void setPopularite(String popularite) {
-        this.popularite = popularite;
-    }
-
-
-// ------------------- PARCEL METHODES -----------------------------------//
-
-
 
     public static final Creator<Film> CREATOR = new Creator<Film>() {
         @Override
@@ -127,27 +95,4 @@ public class Film implements Parcelable  {
             return new Film[size];
         }
     };
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idFilm);
-        dest.writeString(filmImage);
-        dest.writeString(titre);
-        dest.writeString(dateSortie);
-        dest.writeStringList(Genre);
-        dest.writeString(resume);
-        if (popularite.contains(".")) {
-            String separator =".";
-            int i = popularite.lastIndexOf(separator);
-            String v = popularite.substring(0,i);
-            popularite = v;
-        }
-        dest.writeString(popularite);
-    }
 }
