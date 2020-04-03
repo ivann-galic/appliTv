@@ -22,10 +22,10 @@ import java.util.List;
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.ViewHolder> implements View.OnClickListener{
 
 
-private List<Film> filmList;
+private List<FilmCleaned> filmCleaned;
 
-public FilmAdapter(List<Film> filmList) {
-        this.filmList = filmList;
+public FilmAdapter(List<FilmCleaned> filmCleaned) {
+        this.filmCleaned = filmCleaned;
         }
 
 @NonNull
@@ -41,11 +41,11 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 @Override
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Film film = filmList.get(position);
+        FilmCleaned film = filmCleaned.get(position);
 
- Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage);
+ Picasso.get().load("https://image.tmdb.org/t/p/original"+filmCleaned.get(position).filmImage);
 
-        Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage).into(holder.filmImage);
+        Picasso.get().load("https://image.tmdb.org/t/p/original"+filmCleaned.get(position).filmImage).into(holder.filmImage);
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(film.popularite);
@@ -59,7 +59,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 @Override
 public int getItemCount() {
 
-    return filmList.size();
+    return filmCleaned.size();
         }
 
 public class ViewHolder extends RecyclerView.ViewHolder{

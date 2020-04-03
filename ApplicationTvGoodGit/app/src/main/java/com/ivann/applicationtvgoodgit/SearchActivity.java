@@ -102,7 +102,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
                 startActivity(intent);
 
                 // CONSTITUTION DE LA LISTE DE FILMS
