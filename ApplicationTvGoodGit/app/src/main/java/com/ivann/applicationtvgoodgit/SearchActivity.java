@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 
+import com.ivann.applicationtvgoodgit.movieDb.FilmJson;
+import com.ivann.applicationtvgoodgit.movieDb.filmDbApi;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +27,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static java.lang.Integer.parseInt;
+
 
 
 public class SearchActivity extends AppCompatActivity {
@@ -43,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
     /*---------------------------------------------------GESTION API ---------------------------------------------------*/
 
     //---------------TRAITEMENT DE L'INPUT UTILISATEUR ------------------------------------/
-    public  String userChoice() {
+    public String userChoice() {
 
         EditText inputUser = (EditText) findViewById(R.id.EditTextSearch);
         String userChoice = inputUser.getText().toString();
@@ -52,6 +57,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * requête Http à l'aide de Retrofit
+     *
      * @param searchedText correspond à l'entrée de l'utilisateur
      */
     private void callData(String searchedText) {
@@ -82,7 +88,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                 assert response.body() != null;
-                List<Film> filmList = response.body().results;
+                List<FilmJson> filmJsonList = response.body().results;
+
+                List<Film> filmList =  transforminFilmcleaned(filmJsonList);
+
 
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                 intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
@@ -91,17 +100,30 @@ public class SearchActivity extends AppCompatActivity {
                 // CONSTITUTION DE LA LISTE DE FILMS
 
 
-                Log.i("Mainactivity", "la liste de sfilms est = " + filmList.get(0).toString());
+                Log.i("Mainactivity", "la liste de sfilms est = " + filmJsonList.get(0).toString());
 
 
                 // log d etest pour voir si cela a marché
-                Log.i("MainActivity", "la list de sfilms " + filmList.get(0).toString());
+                Log.i("MainActivity", "la list de sfilms " + filmJsonList.get(0).toString());
 
 
                 //----------------------------------------------- CHANGEMENT DE VIEW (start activity)--------------------------------------/
             }
         });
 
+    }
+
+    private  List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
+
+        List<Film> filmList = new ArrayList<Film>();
+
+        for (int i = 0; i < filmJsonList.size(); i++) {
+            FilmJson filmJsonToModify = filmJsonList.get(i);
+            //String genreModify = filmToModify.Genre.get(0);
+            Film film = new Film(filmJsonToModify.getIdFilm(), filmJsonToModify.getFilmImage(), filmJsonToModify.getTitre(), filmJsonToModify.getDateSortie(), "genreModify", filmJsonToModify.getResume(), filmJsonToModify.getPopularite(), false, false);
+            filmList.add(film);
+        }
+        return filmList;
     }
 
 
@@ -151,41 +173,41 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://api.themoviedb.org/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://api.themoviedb.org/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
-                    // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
-                    filmDbApi service = retrofit.create(filmDbApi.class);
+                // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
+                filmDbApi service = retrofit.create(filmDbApi.class);
 
 
-                    // utilisation d'un des services => ici test avec trois services
-                    Call<SearchWrapper> callJson = service.searchDate("d0f80747d8ac43db918936f4a3d09e9c", "fr", "release_date.desc", 1, 1900);
+                // utilisation d'un des services => ici test avec trois services
+                Call<SearchWrapper> callJson = service.searchDate("d0f80747d8ac43db918936f4a3d09e9c", "fr", "release_date.desc", 1, 1900);
 
-                    callJson.enqueue(new Callback<SearchWrapper>() {
+                callJson.enqueue(new Callback<SearchWrapper>() {
 
-                        @Override
-                        public void onFailure(Call<SearchWrapper> call, Throwable t) {
-                            Log.e("MainActivity", "onFailure = " + t.getMessage());
-                        }
+                    @Override
+                    public void onFailure(Call<SearchWrapper> call, Throwable t) {
+                        Log.e("MainActivity", "onFailure = " + t.getMessage());
+                    }
 
                         @Override
                         public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                             assert response.body() != null;
-                            List<Film> filmList = response.body().results;
+                            List<FilmJson> filmJsonList = response.body().results;
+                            List<Film> filmList =  transforminFilmcleaned(filmJsonList);
 
                             Intent intent = new Intent(SearchActivity.this, VoirPlusTardActivity.class);
                             intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                             startActivity(intent);
 
 
-                        }
-                    });
-                }
+                    }
+                });
+            }
 
-            });
-
+        });
 
 
         radioFilterGenre.setOnClickListener(new View.OnClickListener() {
@@ -201,24 +223,22 @@ public class SearchActivity extends AppCompatActivity {
         buttonCloseGenres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               cardViewGenres.setVisibility(View.INVISIBLE);
+                cardViewGenres.setVisibility(View.INVISIBLE);
                 cardViewFilter.setVisibility(View.VISIBLE);
-              //  RadioGroupGenre1.clearCheck();
-              //  RadioGroupGenre2.clearCheck();
-                //bug qui fait que l'appli plante quand on appuie sur la croix, fonction clearCheck vraiment nécessaire?
-                // alors qu'on supprime le tableau d'affichage ligne 159.
             }
 
         });
 
 
-
         RadioGroupGenre1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
                 RadioButton rB = findViewById(checkedId);
 
                 int idGenre = Util.genreStringToInt(rB.getText().toString());
+                rB.setChecked(false);
+
 
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://api.themoviedb.org/")
@@ -242,12 +262,15 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                         assert response.body() != null;
-                        List<Film> filmList = response.body().results;
+                        List<FilmJson> filmJsonList = response.body().results;
+                        List<Film> filmList =  transforminFilmcleaned(filmJsonList);
+
+
+
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                         intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                         startActivity(intent);
-
 
                     }
                 });
@@ -257,9 +280,11 @@ public class SearchActivity extends AppCompatActivity {
         RadioGroupGenre2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
                 RadioButton rB = findViewById(checkedId);
 
                 int idGenre = Util.genreStringToInt(rB.getText().toString());
+                rB.setChecked(false);
 
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://api.themoviedb.org/")
@@ -283,13 +308,14 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                         assert response.body() != null;
-                        List<Film> filmList = response.body().results;
+                        List<FilmJson> filmJsonList = response.body().results;
+
+                        List<Film> filmList =  transforminFilmcleaned(filmJsonList);
+
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                         intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                         startActivity(intent);
-
-
                     }
                 });
             }

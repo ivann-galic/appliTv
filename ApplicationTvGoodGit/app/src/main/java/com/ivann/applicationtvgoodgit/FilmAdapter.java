@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,16 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.ViewHolder> implements View.OnClickListener{
 
 
-private List<Film> filmList;
+private List<Film> film;
 
-public FilmAdapter(List<Film> filmList) {
-        this.filmList = filmList;
+public FilmAdapter(List<Film> film) {
+        this.film = film;
         }
 
 @NonNull
@@ -41,11 +39,11 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 @Override
 public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Film film = filmList.get(position);
+        Film film = this.film.get(position);
 
- Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage);
+ Picasso.get().load("https://image.tmdb.org/t/p/original"+ this.film.get(position).filmImage);
 
-        Picasso.get().load("https://image.tmdb.org/t/p/original"+filmList.get(position).filmImage).into(holder.filmImage);
+        Picasso.get().load("https://image.tmdb.org/t/p/original"+ this.film.get(position).filmImage).into(holder.filmImage);
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(film.popularite);
@@ -59,7 +57,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 @Override
 public int getItemCount() {
 
-    return filmList.size();
+    return film.size();
         }
 
 public class ViewHolder extends RecyclerView.ViewHolder{
@@ -78,6 +76,7 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         popularite = itemView.findViewById(R.id.textViewPopularite);
         genre = itemView.findViewById(R.id.textViewGenre);
 //        like = itemView.findViewById(R.id.imageButtonLike);
+
     }
 
 }

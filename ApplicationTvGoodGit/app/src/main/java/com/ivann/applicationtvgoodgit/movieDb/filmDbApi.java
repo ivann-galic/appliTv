@@ -1,4 +1,6 @@
-package com.ivann.applicationtvgoodgit;
+package com.ivann.applicationtvgoodgit.movieDb;
+
+import com.ivann.applicationtvgoodgit.SearchWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

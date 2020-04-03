@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".FocusFilmActivity">
+
 
     <ImageView
         android:id="@+id/imageViewPoster"
@@ -17,69 +19,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Titre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
-
-    <TextView
-        android:id="@+id/textViewRealisateur"
-        android:layout_width="320dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Réalisateur"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
-
-    <TextView
-        android:id="@+id/textViewParution"
-        android:layout_width="320dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Parution"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRealisateur" />
-
-    <TextView
-        android:id="@+id/textViewGenre"
-        android:layout_width="320dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Genre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewParution" />
-
-    <TextView
-        android:id="@+id/textViewResume"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:justificationMode="inter_word"
-        android:text="Resume"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGenre" />
-
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonHorloge"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonCoeur"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,18 +34,82 @@
         app:srcCompat="@drawable/no_clock" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imageButtonCoeur"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonHorloge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonHorloge"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonHorloge"
         app:srcCompat="@drawable/no_like" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="407dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonHorloge">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewParution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Date de sortie" />
+
+            <TextView
+                android:id="@+id/textViewGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Genre" />
+
+            <TextView
+                android:id="@+id/textViewPopularite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Popularité" />
+
+            <TextView
+                android:id="@+id/textViewResume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:justificationMode="inter_word"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Résumé" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
