@@ -29,10 +29,17 @@ public class FocusFilmActivity extends AppCompatActivity {
 
         Log.i("FocusActivity", "la list des films " + film);
 
+
         final ImageButton imageButtonCoeur = findViewById(R.id.imageButtonCoeur);
         imageButtonCoeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(film.isFavorite == true) {
+                    imageButtonCoeur.setImageResource(R.drawable.like);
+                } else {
+                    imageButtonCoeur.setImageResource(R.drawable.no_like);
+                }
+
                 onFavoriteClicked();
             }
         });
@@ -53,6 +60,13 @@ public class FocusFilmActivity extends AppCompatActivity {
     }
 
     private void onFavoriteClicked() {
+
+        if (film.isFavorite){
+            FilmDao filmDao = App.db.filmDao();
+            int favId = film.idFilm;
+            filmDao.delFilm(favId);
+            film.isFavorite = false;
+        }
         FilmDao filmDao = App.db.filmDao();
         film.isFavorite = true;
         filmDao.insertFilm(film);

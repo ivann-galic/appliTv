@@ -15,8 +15,8 @@ public interface FilmDao {
     @Insert
     void insertFilm(Film film);
 
-    //@Query("DELETE FROM film WHERE idFilm = ...")
-    //List<Film> delFilm();
+    @Query("DELETE FROM film WHERE idFilm = :favId")
+    void delFilm(int favId);
 
     @Query("SELECT * FROM film")
     List<Film> getAll();
