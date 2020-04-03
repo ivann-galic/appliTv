@@ -17,7 +17,7 @@ public class VoirPlusTardActivity extends AppCompatActivity {
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_collections);
+            setContentView(R.layout.activity_voir_plus_tard);
             Intent srcIntent = getIntent();
             filmList = srcIntent.getParcelableArrayListExtra("FilmList");
 
