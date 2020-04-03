@@ -49,8 +49,8 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.titre.setText(film.titre);
         holder.date.setText(film.dateSortie);
         holder.popularite.setText(film.popularite);
-    holder.itemView.setTag(film);
-    holder.itemView.setOnClickListener(this);
+        holder.itemView.setTag(film);
+        holder.itemView.setOnClickListener(this);
         //holder.genre.setText(film.Genre);
         //holder.like.setBottom(film.);
 

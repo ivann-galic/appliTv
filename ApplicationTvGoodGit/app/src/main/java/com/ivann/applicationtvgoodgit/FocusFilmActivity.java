@@ -26,6 +26,7 @@ public class FocusFilmActivity extends AppCompatActivity {
         Log.i("FocusActivity", "la list des films " + film);
 
         final TextView textViewTitle = findViewById(R.id.textViewTitle);
+        assert film != null;
         textViewTitle.setText(film.titre);
         final TextView textViewParution = findViewById(R.id.textViewParution);
          textViewParution.setText(film.dateSortie);
