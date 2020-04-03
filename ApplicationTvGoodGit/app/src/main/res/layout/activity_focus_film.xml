@@ -20,13 +20,13 @@
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonHorloge"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="15dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonCoeur"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,18 +34,18 @@
         app:srcCompat="@drawable/no_clock" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imageButtonCoeur"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButtonHorloge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonHorloge"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonHorloge"
         app:srcCompat="@drawable/no_like" />
 
     <androidx.core.widget.NestedScrollView
@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton">
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonHorloge">
 
         <LinearLayout
             android:layout_width="match_parent"

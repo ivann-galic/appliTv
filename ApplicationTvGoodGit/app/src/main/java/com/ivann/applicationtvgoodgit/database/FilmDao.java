@@ -1,9 +1,11 @@
-package com.ivann.applicationtvgoodgit;
+package com.ivann.applicationtvgoodgit.database;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.ivann.applicationtvgoodgit.movieDb.FilmJson;
+import com.ivann.applicationtvgoodgit.Film;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ import java.util.List;
 public interface FilmDao {
 
     @Insert
-    void insertFilm(FilmCleaned film);
+    void insertFilm(Film film);
 
     //@Query("DELETE FROM film WHERE idFilm = ...")
     //List<Film> delFilm();

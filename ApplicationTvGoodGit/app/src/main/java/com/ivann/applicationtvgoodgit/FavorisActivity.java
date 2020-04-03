@@ -20,7 +20,7 @@ public class FavorisActivity extends AppCompatActivity {
 
         Film f = new Film();
         f.titre = " vas te faire foutre romain";
-        dao.insertFilm(f);
+        //dao.insertFilm(f);
 
         List<Film> films = dao.getAll();
         Log.i("favorisActivity", "size" + films.size());

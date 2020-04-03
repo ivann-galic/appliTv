@@ -1,4 +1,4 @@
-package com.ivann.applicationtvgoodgit;
+package com.ivann.applicationtvgoodgit.database;
 
 import androidx.room.TypeConverter;
 

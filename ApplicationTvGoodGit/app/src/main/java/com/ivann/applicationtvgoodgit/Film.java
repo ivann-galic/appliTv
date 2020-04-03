@@ -15,7 +15,7 @@ Il est parcelisé pour pourvoir passer d'une vue à l'autre. Pour l'instant, pas
  */
 @Entity
 public class Film implements Parcelable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int idDb;
     public int idFilm;
     public String filmImage;
