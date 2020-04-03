@@ -34,17 +34,17 @@ import okhttp3.Response;
 
 public class ListFilmActivity extends AppCompatActivity {
 
-    private List<Film> filmList;
+    private List<FilmCleaned> filmCleaned;
     private FilmAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent srcIntent = getIntent();
-        filmList = srcIntent.getParcelableArrayListExtra("FilmList");
+        filmCleaned = srcIntent.getParcelableArrayListExtra("FilmList");
 
 
         setContentView(R.layout.activity_list_film);
-        adapter = new FilmAdapter(filmList);
+        adapter = new FilmAdapter(filmCleaned);
 
        /* for (int i=0; i<filmList.size(); i++){
             filmList.get(i);
