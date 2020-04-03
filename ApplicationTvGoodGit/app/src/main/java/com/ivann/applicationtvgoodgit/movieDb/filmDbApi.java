@@ -59,5 +59,14 @@ cette interface prépare le srequest et le sréponses
                 @Query("page") int page,
                 @Query("primary_release_date.gte") int dateId);
 
+        // REQUETE A L'AFFICHE
+        //https://api.themoviedb.org/3/movie/now_playing?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&page=1&region=FR
+        @GET("3/movie/now_playing?")
+        public Call<SearchWrapper> searchNowPlaying(
+                @Query("api_key") String apiKey,
+                @Query("language") String language,
+                @Query("page") int page,
+                @Query("region") String region);
 
+        
 }
