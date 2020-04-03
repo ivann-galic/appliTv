@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
     /*---------------------------------------------------GESTION API ---------------------------------------------------*/
 
     //---------------TRAITEMENT DE L'INPUT UTILISATEUR ------------------------------------/
-    public  String userChoice() {
+    public String userChoice() {
 
         EditText inputUser = (EditText) findViewById(R.id.EditTextSearch);
         String userChoice = inputUser.getText().toString();
@@ -52,6 +52,7 @@ public class SearchActivity extends AppCompatActivity {
 
     /**
      * requête Http à l'aide de Retrofit
+     *
      * @param searchedText correspond à l'entrée de l'utilisateur
      */
     private void callData(String searchedText) {
@@ -151,75 +152,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://api.themoviedb.org/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
-                    filmDbApi service = retrofit.create(filmDbApi.class);
-
-
-                    // utilisation d'un des services => ici test avec trois services
-                    Call<SearchWrapper> callJson = service.searchDate("d0f80747d8ac43db918936f4a3d09e9c", "fr", "release_date.desc", 1, 1900);
-
-                    callJson.enqueue(new Callback<SearchWrapper>() {
-
-                        @Override
-                        public void onFailure(Call<SearchWrapper> call, Throwable t) {
-                            Log.e("MainActivity", "onFailure = " + t.getMessage());
-                        }
-
-                        @Override
-                        public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
-                            assert response.body() != null;
-                            List<Film> filmList = response.body().results;
-
-                            Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
-                            startActivity(intent);
-
-
-                        }
-                    });
-                }
-
-            });
-
-
-
-        radioFilterGenre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RadioGroupFilter.clearCheck();
-                cardViewFilter.setVisibility(View.INVISIBLE);
-                cardViewGenres.setVisibility(View.VISIBLE);
-            }
-        });
-
-        final ImageButton buttonCloseGenres = (ImageButton) findViewById(R.id.imageButtonCloseGenres);
-        buttonCloseGenres.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               cardViewGenres.setVisibility(View.INVISIBLE);
-                cardViewFilter.setVisibility(View.VISIBLE);
-              //  RadioGroupGenre1.clearCheck();
-              //  RadioGroupGenre2.clearCheck();
-                //bug qui fait que l'appli plante quand on appuie sur la croix, fonction clearCheck vraiment nécessaire?
-                // alors qu'on supprime le tableau d'affichage ligne 159.
-            }
-
-        });
-
-
-
-        RadioGroupGenre1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton rB = findViewById(checkedId);
-
-                int idGenre = Util.genreStringToInt(rB.getText().toString());
-
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://api.themoviedb.org/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -230,9 +162,9 @@ public class SearchActivity extends AppCompatActivity {
 
 
                 // utilisation d'un des services => ici test avec trois services
-                Call<SearchWrapper> callJson4 = service.searchGenre("d0f80747d8ac43db918936f4a3d09e9c", "fr", "popularity.desc", 1, idGenre);
+                Call<SearchWrapper> callJson = service.searchDate("d0f80747d8ac43db918936f4a3d09e9c", "fr", "release_date.desc", 1, 1900);
 
-                callJson4.enqueue(new Callback<SearchWrapper>() {
+                callJson.enqueue(new Callback<SearchWrapper>() {
 
                     @Override
                     public void onFailure(Call<SearchWrapper> call, Throwable t) {
@@ -252,14 +184,39 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 });
             }
+
         });
 
-        RadioGroupGenre2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        radioFilterGenre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RadioGroupFilter.clearCheck();
+                cardViewFilter.setVisibility(View.INVISIBLE);
+                cardViewGenres.setVisibility(View.VISIBLE);
+            }
+        });
+
+        final ImageButton buttonCloseGenres = (ImageButton) findViewById(R.id.imageButtonCloseGenres);
+        buttonCloseGenres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewGenres.setVisibility(View.INVISIBLE);
+                cardViewFilter.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+
+        RadioGroupGenre1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
                 RadioButton rB = findViewById(checkedId);
 
                 int idGenre = Util.genreStringToInt(rB.getText().toString());
+                rB.setChecked(false);
+
 
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://api.themoviedb.org/")
@@ -289,7 +246,47 @@ public class SearchActivity extends AppCompatActivity {
                         intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                         startActivity(intent);
 
+                    }
+                });
+            }
+        });
 
+        RadioGroupGenre2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                RadioButton rB = findViewById(checkedId);
+
+                int idGenre = Util.genreStringToInt(rB.getText().toString());
+                rB.setChecked(false);
+
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://api.themoviedb.org/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                // on générée l'interface => on dit donc :  tu me generes une implémentation de la class filmDbApi que l'on va stocker dans service
+                filmDbApi service = retrofit.create(filmDbApi.class);
+
+
+                // utilisation d'un des services => ici test avec trois services
+                Call<SearchWrapper> callJson4 = service.searchGenre("d0f80747d8ac43db918936f4a3d09e9c", "fr", "popularity.desc", 1, idGenre);
+
+                callJson4.enqueue(new Callback<SearchWrapper>() {
+
+                    @Override
+                    public void onFailure(Call<SearchWrapper> call, Throwable t) {
+                        Log.e("MainActivity", "onFailure = " + t.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
+                        assert response.body() != null;
+                        List<Film> filmList = response.body().results;
+
+                        Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
+                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                        startActivity(intent);
                     }
                 });
             }
