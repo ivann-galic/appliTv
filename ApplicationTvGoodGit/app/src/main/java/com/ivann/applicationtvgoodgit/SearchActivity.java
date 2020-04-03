@@ -86,19 +86,8 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                 assert response.body() != null;
                 List<Film> filmList = response.body().results;
-                List<FilmCleaned> filmCleanedList = new ArrayList<FilmCleaned>();
 
-                for(int i = 0; i < filmList.size(); i ++){
-                    Film filmToModify = filmList.get(i);
-                    String genreModify = filmToModify.Genre.get(0);
-                    FilmCleaned  filmCleaned = new FilmCleaned(filmToModify.getIdFilm(), filmToModify.getFilmImage(), filmToModify.getTitre(),filmToModify.getDateSortie(), genreModify, filmToModify.getResume(),filmToModify.getPopularite(),false,false);
-                    filmCleanedList.add(filmCleaned);
-
-                    Log.i("Search", "coucou c 'ets moi");
-                }
-
-                // fonction convert film in filmCleaned
-
+                List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
 
 
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
@@ -119,6 +108,20 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private  List<FilmCleaned> transforminFilmcleaned(  List<Film> filmList) {
+
+        List<FilmCleaned> filmCleanedList = new ArrayList<FilmCleaned>();
+
+        for (int i = 0; i < filmList.size(); i++) {
+            Film filmToModify = filmList.get(i);
+            String genreModify = filmToModify.Genre.get(0);
+            FilmCleaned filmCleaned = new FilmCleaned(filmToModify.getIdFilm(), filmToModify.getFilmImage(), filmToModify.getTitre(), filmToModify.getDateSortie(), genreModify, filmToModify.getResume(), filmToModify.getPopularite(), false, false);
+            filmCleanedList.add(filmCleaned);
+
+        }
+        return filmCleanedList;
     }
 
 
@@ -191,9 +194,10 @@ public class SearchActivity extends AppCompatActivity {
                         public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                             assert response.body() != null;
                             List<Film> filmList = response.body().results;
+                            List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
 
                             Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
                             startActivity(intent);
 
 
@@ -260,12 +264,13 @@ public class SearchActivity extends AppCompatActivity {
                     public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                         assert response.body() != null;
                         List<Film> filmList = response.body().results;
+                        List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
 
 
 
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
                         startActivity(intent);
 
 
@@ -305,8 +310,11 @@ public class SearchActivity extends AppCompatActivity {
                         assert response.body() != null;
                         List<Film> filmList = response.body().results;
 
+                        List<FilmCleaned> filmCleanedList =  transforminFilmcleaned(filmList);
+
+
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
-                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmCleanedList);
                         startActivity(intent);
 
 
