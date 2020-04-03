@@ -175,7 +175,7 @@ public class SearchActivity extends AppCompatActivity {
                             assert response.body() != null;
                             List<Film> filmList = response.body().results;
 
-                            Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
+                            Intent intent = new Intent(SearchActivity.this, VoirPlusTardActivity.class);
                             intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
                             startActivity(intent);
 
