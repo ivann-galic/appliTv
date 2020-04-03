@@ -31,7 +31,7 @@ public class FilmCleaned implements Parcelable {
     @SerializedName("overview")
     public String resume;
     @SerializedName("popularity")
-    public int popularite;
+    public String popularite;
     @SerializedName("isFavorite")
     public boolean isFavorite = false;
     @SerializedName("watchListed")
@@ -42,7 +42,7 @@ public class FilmCleaned implements Parcelable {
     }*/
 
 
-    public FilmCleaned(int idFilm, String filmImage, String titre, String dateSortie, String genre, String resume, int popularite, boolean isFavorite, boolean watchListed) {
+    public FilmCleaned(int idFilm, String filmImage, String titre, String dateSortie, String genre, String resume, String popularite, boolean isFavorite, boolean watchListed) {
         this.idFilm = idFilm;
         this.filmImage = filmImage;
         this.titre = titre;
@@ -61,7 +61,7 @@ public class FilmCleaned implements Parcelable {
         dateSortie = in.readString();
         Genre = in.readString();
         resume = in.readString();
-        popularite = in.readInt();
+        popularite = in.readString();
         isFavorite = in.readByte() != 0;
         watchListed = in.readByte() != 0;
     }
@@ -74,7 +74,7 @@ public class FilmCleaned implements Parcelable {
         dest.writeString(dateSortie);
         dest.writeString(Genre);
         dest.writeString(resume);
-        dest.writeInt(popularite);
+        dest.writeString(popularite);
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeByte((byte) (watchListed ? 1 : 0));
     }

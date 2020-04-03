@@ -90,9 +90,9 @@ public class SearchActivity extends AppCompatActivity {
                 for(int i = 0; i < filmList.size(); i ++){
                     Film filmToModify = filmList.get(i);
                     String genreModify = filmToModify.Genre.get(0);
-                    int populariteModify = parseInt(filmToModify.popularite);
-                    Log.i("SearchActivity", "id" + filmToModify.getIdFilm() + filmToModify.getFilmImage() + filmToModify.getTitre() + filmToModify.getDateSortie() + genreModify + filmToModify.getResume() + populariteModify);
-                    FilmCleaned  filmCleaned = new FilmCleaned(filmToModify.getIdFilm(), filmToModify.getFilmImage(), filmToModify.getTitre(),filmToModify.getDateSortie(), genreModify, filmToModify.getResume(),populariteModify,false,false);
+                   // int populariteModify = parseInt(filmToModify.popularite);
+                //    Log.i("SearchActivity", "id" + filmToModify.getIdFilm() + filmToModify.getFilmImage() + filmToModify.getTitre() + filmToModify.getDateSortie() + genreModify + filmToModify.getResume() + populariteModify);
+                    FilmCleaned  filmCleaned = new FilmCleaned(filmToModify.getIdFilm(), filmToModify.getFilmImage(), filmToModify.getTitre(),filmToModify.getDateSortie(), genreModify, filmToModify.getResume(),filmToModify.getPopularite(),false,false);
 
                 }
 
