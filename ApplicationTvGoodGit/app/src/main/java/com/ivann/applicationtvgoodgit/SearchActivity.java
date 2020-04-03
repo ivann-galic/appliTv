@@ -113,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private  List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
+    public static  List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
 
         List<Film> filmList = new ArrayList<Film>();
 
@@ -264,9 +264,6 @@ public class SearchActivity extends AppCompatActivity {
                         assert response.body() != null;
                         List<FilmJson> filmJsonList = response.body().results;
                         List<Film> filmList =  transforminFilmcleaned(filmJsonList);
-
-
-
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                         intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
