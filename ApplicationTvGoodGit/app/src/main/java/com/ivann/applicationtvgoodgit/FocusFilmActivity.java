@@ -29,18 +29,27 @@ public class FocusFilmActivity extends AppCompatActivity {
 
         Log.i("FocusActivity", "la list des films " + film);
 
-
         final ImageButton imageButtonCoeur = findViewById(R.id.imageButtonCoeur);
+
+        if(!film.isFavorite) {
+            imageButtonCoeur.setImageResource(R.drawable.no_like);
+        } else {
+            imageButtonCoeur.setImageResource(R.drawable.like);
+        }
+
         imageButtonCoeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(film.isFavorite == true) {
-                    imageButtonCoeur.setImageResource(R.drawable.like);
-                } else {
                     imageButtonCoeur.setImageResource(R.drawable.no_like);
+                    onFavoriteClicked();
+                    Log.i("FocusFilm", "Like: " + film.isFavorite);
+                } else {
+                    imageButtonCoeur.setImageResource(R.drawable.like);
+                    onFavoriteClicked();
+                    Log.i("FocusFilm", "NoLike: " + film.isFavorite);
                 }
 
-                onFavoriteClicked();
             }
         });
         final TextView textViewTitle = findViewById(R.id.textViewTitle);
@@ -66,9 +75,10 @@ public class FocusFilmActivity extends AppCompatActivity {
             int favId = film.idFilm;
             filmDao.delFilm(favId);
             film.isFavorite = false;
+        } else {
+            FilmDao filmDao = App.db.filmDao();
+            film.isFavorite = true;
+            filmDao.insertFilm(film);
         }
-        FilmDao filmDao = App.db.filmDao();
-        film.isFavorite = true;
-        filmDao.insertFilm(film);
     }
 }
