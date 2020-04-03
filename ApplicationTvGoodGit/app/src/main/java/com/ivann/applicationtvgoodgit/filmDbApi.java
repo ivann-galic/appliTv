@@ -20,31 +20,42 @@ cette interface prépare le srequest et le sréponses
   //  https://api.themoviedb.org/3/discover/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&sort_by=popularity.desc&page=1"
 
         @GET("3/discover/movie?")
-        public Call<SearchWrapper> searchMovies(
+        public Call<SearchWrapper> searchCategory(
                 @Query("api_key") String apiKey,
                 @Query("language") String language,
                 @Query("sort_by") String tri,
                 @Query("page") int page);
 
 
-        // https://api.themoviedb.org/3/search/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&query=star&page=1
-
-        @GET("3/search/movie?")
-        public Call<SearchWrapper> secarhMyMovies (
-                @Query("api_key") String apiKey,
-                @Query("language") String language,
-                @Query("query") String query,
-                @Query("page") int page);
-
         // https://api.themoviedb.org/3/search/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&query=star&page=1&include_adult=false
         @GET("3/search/movie?")
-        public Call<SearchWrapper> searchMoviesTest(
+        public Call<SearchWrapper> searchMovies(
                 @Query("api_key") String apiKey,
                 @Query("language") String language,
                 @Query("query") String searchText,
                 @Query("page") int page);
 
 
+
+        //https://api.themoviedb.org/3/discover/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&sort_by=popularity.desc&include_adult=false&page=1&with_genres=28
+
+
+        @GET("3/discover/movie?")
+        public Call<SearchWrapper> searchGenre(
+                @Query("api_key") String apiKey,
+                @Query("language") String language,
+                @Query("sort_by") String tri,
+                @Query("page") int page,
+                @Query("with_genres") int genreId);
+
+       // https://api.themoviedb.org/3/discover/movie?api_key=d0f80747d8ac43db918936f4a3d09e9c&language=fr&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=1920
+        @GET("3/discover/movie?")
+        public Call<SearchWrapper> searchDate(
+                @Query("api_key") String apiKey,
+                @Query("language") String language,
+                @Query("sort_by") String tri,
+                @Query("page") int page,
+                @Query("primary_release_date.gte") int dateId);
 
 
 }
