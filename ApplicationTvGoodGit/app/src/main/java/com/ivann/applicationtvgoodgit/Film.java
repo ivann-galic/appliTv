@@ -2,21 +2,22 @@ package com.ivann.applicationtvgoodgit;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /*
 cette classe permet de créer l'objet film à partir des données récupérées sur les api.
 Il est parcelisé pour pourvoir passer d'une vue à l'autre. Pour l'instant, pas de casting, ni de real.
  */
+
+@Entity
 public class Film implements Parcelable  {
+    @PrimaryKey
     @SerializedName("id")
     public  int idFilm;
     @SerializedName("poster_path")
@@ -32,6 +33,10 @@ public class Film implements Parcelable  {
     @SerializedName("popularity")
     public String popularite;
 
+    Film(){
+
+    }
+
     //----------------------- CONSTRUCTOR----------------------------------//
     protected Film(Parcel in) {
         idFilm = in.readInt();
@@ -46,6 +51,9 @@ public class Film implements Parcelable  {
 
 
     //--------------------- GETTERS AND SETTERS--------------------------------//
+
+
+
     public int getIdFilm() {
         return idFilm;
     }
@@ -104,7 +112,6 @@ public class Film implements Parcelable  {
     }
 
 
-
 // ------------------- PARCEL METHODES -----------------------------------//
 
 
@@ -135,35 +142,6 @@ public class Film implements Parcelable  {
         dest.writeString(dateSortie);
         dest.writeStringList(Genre);
         dest.writeString(resume);
-        String separator =".";
-        int i = popularite.lastIndexOf(separator);
-        String v = popularite.substring(0,i);
-        popularite = v;
-        Log.i("SearchA", "popularite après sub: " + popularite);
-
-/*        long longPopularite = Long.parseLong(popularite);
-        Log.i("SearchA", "longPopularite: " + longPopularite);
-        BigDecimal bd = new BigDecimal(longPopularite);
-        bd= bd.setScale(3,BigDecimal.ROUND_DOWN);
-        longPopularite = bd.longValue();
-
-        popularite = String.valueOf(longPopularite);*/
         dest.writeString(popularite);
-
-        /*        float f = Float.parseFloat(popularite);
-        Log.i("SearchA", "f: " + f);
-        BigDecimal bd = new BigDecimal(f);
-        bd= bd.setScale(0,BigDecimal.ROUND_DOWN);
-        f = bd.floatValue();
-
-        popularite = String.valueOf(f);*/
-
-/*        Log.i("SearchA", "popularite: " + popularite);
-
-        String separator =".";
-        int i = popularite.lastIndexOf(separator);
-        String v = popularite.substring(0,i);
-        popularite = v;
-        Log.i("SearchA", "popularite après sub: " + popularite);*/
     }
 }

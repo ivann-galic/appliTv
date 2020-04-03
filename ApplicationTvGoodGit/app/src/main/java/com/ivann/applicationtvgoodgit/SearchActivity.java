@@ -26,6 +26,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static java.lang.Integer.parseInt;
+
+
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -83,6 +86,19 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                 assert response.body() != null;
                 List<Film> filmList = response.body().results;
+
+                for(int i = 0; i < filmList.size(); i ++){
+                    Film filmToModify = filmList.get(i);
+                    String genreModify = filmToModify.Genre.get(0);
+                    int populariteModify = parseInt(filmToModify.popularite);
+                    Log.i("SearchActivity", "id" + filmToModify.getIdFilm() + filmToModify.getFilmImage() + filmToModify.getTitre() + filmToModify.getDateSortie() + genreModify + filmToModify.getResume() + populariteModify);
+                    FilmCleaned  filmCleaned = new FilmCleaned(filmToModify.getIdFilm(), filmToModify.getFilmImage(), filmToModify.getTitre(),filmToModify.getDateSortie(), genreModify, filmToModify.getResume(),populariteModify,false,false);
+
+                }
+
+                // fonction convert film in filmCleaned
+
+
 
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                 intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
@@ -243,6 +259,9 @@ public class SearchActivity extends AppCompatActivity {
                     public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                         assert response.body() != null;
                         List<Film> filmList = response.body().results;
+
+
+
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                         intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
