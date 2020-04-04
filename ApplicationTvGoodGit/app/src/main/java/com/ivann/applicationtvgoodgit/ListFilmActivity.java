@@ -15,6 +15,7 @@ public class ListFilmActivity extends AppCompatActivity {
 
     private List<Film> film;
     private FilmAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -39,14 +39,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final TextView textViewPlusTard = findViewById(R.id.textViewPlusTard);
-        textViewPlusTard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToLater();
-            }
-        });
-
         final TextView textViewRecherche = findViewById(R.id.textViewRecherche);
         textViewRecherche.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,14 +131,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
     private void goToFavoris() {
         final Intent intentFavoris = new Intent(this, FavorisActivity.class);
         startActivity(intentFavoris);
-    }
-
-    private void goToLater() {
-        final Intent intentLater = new Intent(this, LaterActivity.class);
-        startActivity(intentLater);
     }
 
     private void goToSearch() {
@@ -163,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
         final Intent intentAbout = new Intent(this, AboutActivity.class);
         startActivity(intentAbout);
     }
-    public  List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
+
+    public List<Film> transforminFilmcleaned(List<FilmJson> filmJsonList) {
 
         List<Film> filmList = new ArrayList<Film>();
 

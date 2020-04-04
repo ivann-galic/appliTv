@@ -13,6 +13,7 @@ public class LaterActivity extends AppCompatActivity {
 
     private List<Film> filmList;
     private FilmAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

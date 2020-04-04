@@ -31,7 +31,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static java.lang.Integer.parseInt;
 
 
-
 public class SearchActivity extends AppCompatActivity {
 
 
@@ -90,7 +89,7 @@ public class SearchActivity extends AppCompatActivity {
                 assert response.body() != null;
                 List<FilmJson> filmJsonList = response.body().results;
 
-                List<Film> filmList =  transforminFilmcleaned(filmJsonList);
+                List<Film> filmList = transforminFilmcleaned(filmJsonList);
 
 
                 Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
@@ -120,13 +119,13 @@ public class SearchActivity extends AppCompatActivity {
 
         for (int i = 0; i < filmJsonList.size(); i++) {
             FilmJson filmJsonToModify = filmJsonList.get(i);
-        //    Log.i("MainActivity", "le genre est " + filmJsonList.get(i).Genre.get(0));
-            if(filmJsonList.get(i).Genre.isEmpty()){
-                 genre = "genre non précisé";
+            //    Log.i("MainActivity", "le genre est " + filmJsonList.get(i).Genre.get(0));
+            if (filmJsonList.get(i).Genre.isEmpty()) {
+                genre = "genre non précisé";
             } else {
-                 genre = Util.genreToString(Integer.parseInt(filmJsonList.get(i).Genre.get(0)));
+                genre = Util.genreToString(Integer.parseInt(filmJsonList.get(i).Genre.get(0)));
             }
-            
+
             Film film = new Film(filmJsonToModify.getIdFilm(), filmJsonToModify.getFilmImage(), filmJsonToModify.getTitre(), filmJsonToModify.getDateSortie(), genre, filmJsonToModify.getResume(), filmJsonToModify.getPopularite(), false, false);
             filmList.add(film);
         }
@@ -199,15 +198,15 @@ public class SearchActivity extends AppCompatActivity {
                         Log.e("MainActivity", "onFailure = " + t.getMessage());
                     }
 
-                        @Override
-                        public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
-                            assert response.body() != null;
-                            List<FilmJson> filmJsonList = response.body().results;
-                            List<Film> filmList =  transforminFilmcleaned(filmJsonList);
+                    @Override
+                    public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
+                        assert response.body() != null;
+                        List<FilmJson> filmJsonList = response.body().results;
+                        List<Film> filmList = transforminFilmcleaned(filmJsonList);
 
-                            Intent intent = new Intent(SearchActivity.this, VoirPlusTardActivity.class);
-                            intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
-                            startActivity(intent);
+                        Intent intent = new Intent(SearchActivity.this, VoirPlusTardActivity.class);
+                        intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
+                        startActivity(intent);
 
 
                     }
@@ -270,7 +269,7 @@ public class SearchActivity extends AppCompatActivity {
                     public void onResponse(Call<SearchWrapper> call, Response<SearchWrapper> response) {
                         assert response.body() != null;
                         List<FilmJson> filmJsonList = response.body().results;
-                        List<Film> filmList =  transforminFilmcleaned(filmJsonList);
+                        List<Film> filmList = transforminFilmcleaned(filmJsonList);
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);
                         intent.putParcelableArrayListExtra("FilmList", (ArrayList<? extends Parcelable>) filmList);
@@ -314,7 +313,7 @@ public class SearchActivity extends AppCompatActivity {
                         assert response.body() != null;
                         List<FilmJson> filmJsonList = response.body().results;
 
-                        List<Film> filmList =  transforminFilmcleaned(filmJsonList);
+                        List<Film> filmList = transforminFilmcleaned(filmJsonList);
 
 
                         Intent intent = new Intent(SearchActivity.this, ListFilmActivity.class);

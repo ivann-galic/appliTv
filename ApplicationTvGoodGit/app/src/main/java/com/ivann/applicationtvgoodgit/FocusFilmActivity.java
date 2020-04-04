@@ -56,7 +56,7 @@ public class FocusFilmActivity extends AppCompatActivity {
         imageButtonCoeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(favorisFilms.size() > 0 && film.isFavorite) {
+                if (favorisFilms.size() > 0 && film.isFavorite) {
                     imageButtonCoeur.setImageResource(R.drawable.no_like);
                     onFavoriteClicked();
                     Log.i("FocusFilm", "Like: " + film.isFavorite);
@@ -86,7 +86,7 @@ public class FocusFilmActivity extends AppCompatActivity {
 
     private void onFavoriteClicked() {
 
-        if (film.isFavorite){
+        if (film.isFavorite) {
             FilmDao filmDao = App.db.filmDao();
             int favId = film.idFilm;
             filmDao.delFilm(favId);

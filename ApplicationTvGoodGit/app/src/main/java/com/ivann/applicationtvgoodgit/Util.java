@@ -3,21 +3,21 @@ package com.ivann.applicationtvgoodgit;
 public class Util {
 
     public static int genreStringToInt(String text) {
-        switch (text){
-            case "Action" :
+        switch (text) {
+            case "Action":
                 return 28;
 
-            case "Aventure" :
+            case "Aventure":
                 return 12;
 
             case "Animation":
-                return 16 ;
+                return 16;
 
-            case "Comédie" :
+            case "Comédie":
                 return 35;
 
             case "Crime":
-                return 80 ;
+                return 80;
 
             case "Documentaire":
                 return 99;
@@ -53,19 +53,20 @@ public class Util {
                 return 10770;
 
             case "Thriller":
-                return 53 ;
+                return 53;
 
             case "Guerre":
                 return 10752;
 
             case "Western":
-                return 37 ;
+                return 37;
 
             default:
                 return 0;
         }
 
     }
+
     /*
       Cette fonction traduit les id_genre donnés par l'api en string exploitables pour l'affichage dans le recyclerview
        */
@@ -138,9 +139,6 @@ public class Util {
 
 
     }
-
-
-
 
 
 }

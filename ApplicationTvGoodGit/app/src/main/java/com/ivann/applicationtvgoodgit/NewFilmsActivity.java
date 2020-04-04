@@ -28,22 +28,23 @@ public class NewFilmsActivity extends AppCompatActivity {
 
     private List<Film> filmList;
     private FilmAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_films);
 
 
-                Intent srcIntent = getIntent();
-                filmList = srcIntent.getParcelableArrayListExtra("FilmList");
-                setContentView(R.layout.activity_new_films);
-                adapter = new FilmAdapter(filmList);
+        Intent srcIntent = getIntent();
+        filmList = srcIntent.getParcelableArrayListExtra("FilmList");
+        setContentView(R.layout.activity_new_films);
+        adapter = new FilmAdapter(filmList);
 
        /* for (int i=0; i<filmList.size(); i++){
             filmList.get(i);
         }*/
-                RecyclerView recyclerView = findViewById(R.id.recyclerViewAffiche);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                recyclerView.setAdapter(adapter);
-            }
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewAffiche);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
 }

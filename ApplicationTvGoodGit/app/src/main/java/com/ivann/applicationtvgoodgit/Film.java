@@ -27,10 +27,6 @@ public class Film implements Parcelable {
     public boolean isFavorite = false;
     public boolean watchListed = false;
 
-    /*Film(){
-
-    }*/
-
 
     public Film(int idFilm, String filmImage, String titre, String dateSortie, String genre, String resume, String popularite, boolean isFavorite, boolean watchListed) {
         this.idFilm = idFilm;
@@ -69,9 +65,9 @@ public class Film implements Parcelable {
         dest.writeString(Genre);
         dest.writeString(resume);
         if (popularite.contains(".")) {
-            String separator =".";
+            String separator = ".";
             int i = popularite.lastIndexOf(separator);
-            String v = popularite.substring(0,i);
+            String v = popularite.substring(0, i);
             popularite = v;
         }
         dest.writeString(popularite);

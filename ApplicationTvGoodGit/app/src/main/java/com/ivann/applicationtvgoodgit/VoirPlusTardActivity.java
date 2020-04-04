@@ -14,22 +14,22 @@ public class VoirPlusTardActivity extends AppCompatActivity {
     private FilmAdapter adapter;
 
 
-        @Override
-        protected void onCreate (Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_voir_plus_tard);
-            Intent srcIntent = getIntent();
-            filmList = srcIntent.getParcelableArrayListExtra("FilmList");
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_voir_plus_tard);
+        Intent srcIntent = getIntent();
+        filmList = srcIntent.getParcelableArrayListExtra("FilmList");
 
 
-            setContentView(R.layout.activity_voir_plus_tard);
-            adapter = new FilmAdapter(filmList);
+        setContentView(R.layout.activity_voir_plus_tard);
+        adapter = new FilmAdapter(filmList);
 
        /* for (int i=0; i<filmList.size(); i++){
             filmList.get(i);
         }*/
-            RecyclerView recyclerView = findViewById(R.id.recyclerViewVoirPlusTard);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(adapter);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewVoirPlusTard);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 }
