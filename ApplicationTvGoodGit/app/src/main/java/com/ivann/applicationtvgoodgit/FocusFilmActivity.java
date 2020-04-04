@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.ivann.applicationtvgoodgit.database.FilmDao;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class FocusFilmActivity extends AppCompatActivity {
 
     Film film;
@@ -26,21 +28,35 @@ public class FocusFilmActivity extends AppCompatActivity {
 
         Intent srcIntent = getIntent();
         film = srcIntent.getParcelableExtra("film");
+        final ImageButton imageButtonCoeur = findViewById(R.id.imageButtonCoeur);
+        FilmDao dao = App.db.filmDao();
+
+        final List<Film> favorisFilms = dao.getAll();
+
 
         Log.i("FocusActivity", "la list des films " + film);
+        Log.i("FocusActivity", "la list des favoris " + favorisFilms);
+        Log.i("FocusActivity", "la taille des favoris " + favorisFilms.size());
 
-        final ImageButton imageButtonCoeur = findViewById(R.id.imageButtonCoeur);
 
-        if(!film.isFavorite) {
-            imageButtonCoeur.setImageResource(R.drawable.no_like);
-        } else {
-            imageButtonCoeur.setImageResource(R.drawable.like);
+        Film filmFromFavorite;
+
+        // si la liste des favoris n'est pas vide, on la parcours. Si notre film est dedans on le substitue
+        // par celui qui est dans la liste (donc avec le statut isFavorite à jour) pour la suite de la procédure.
+        if (favorisFilms.size() > 0) {
+            for (int i = 0; i < favorisFilms.size(); i++) {
+                filmFromFavorite = favorisFilms.get(i);
+                if (filmFromFavorite.idFilm == film.idFilm) {
+                    film = filmFromFavorite;
+                    imageButtonCoeur.setImageResource(R.drawable.like);
+                }
+            }
         }
 
         imageButtonCoeur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(film.isFavorite == true) {
+                if(favorisFilms.size() > 0 && film.isFavorite) {
                     imageButtonCoeur.setImageResource(R.drawable.no_like);
                     onFavoriteClicked();
                     Log.i("FocusFilm", "Like: " + film.isFavorite);
@@ -65,7 +81,7 @@ public class FocusFilmActivity extends AppCompatActivity {
         ImageView imageViewPoster = findViewById(R.id.imageViewPoster);
         Picasso.get().load("https://image.tmdb.org/t/p/original" + film.filmImage).into(imageViewPoster);// utilisation de la lib Picasso qui permet de choper une image via url ultra simplement
         final TextView textViewGenre = findViewById(R.id.textViewGenre);
-        textViewGenre.setText(film.Genre);
+        textViewGenre.setText("Genre : " + film.Genre);
     }
 
     private void onFavoriteClicked() {

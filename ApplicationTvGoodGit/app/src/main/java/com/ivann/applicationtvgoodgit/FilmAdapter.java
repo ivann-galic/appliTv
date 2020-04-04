@@ -32,7 +32,6 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_film, parent,false);
-
         return new ViewHolder(view);
         }
 
@@ -41,7 +40,7 @@ public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Film film = this.film.get(position);
 
- Picasso.get().load("https://image.tmdb.org/t/p/original"+ this.film.get(position).filmImage);
+        Picasso.get().load("https://image.tmdb.org/t/p/original"+ this.film.get(position).filmImage);
 
         Picasso.get().load("https://image.tmdb.org/t/p/original"+ this.film.get(position).filmImage).into(holder.filmImage);
         holder.titre.setText(film.titre);

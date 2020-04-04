@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.ivann.applicationtvgoodgit.database.FilmDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavorisActivity extends AppCompatActivity {
@@ -25,10 +26,11 @@ public class FavorisActivity extends AppCompatActivity {
         FilmDao dao = App.db.filmDao();
 
         List<Film> favorisFilms = dao.getAll();
+
+        Intent intent = new Intent(this, ListFilmActivity.class);
+
+
         Log.i("favorisActivity", "size" + favorisFilms.size());
-
-
-
 
         setContentView(R.layout.activity_favoris);
         adapter = new FilmAdapter(favorisFilms);
@@ -40,7 +42,5 @@ public class FavorisActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-
     }
-
 }
