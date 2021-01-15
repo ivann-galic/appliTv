@@ -21,25 +21,25 @@ Setup Sdk with android sdk.
 
 Home screen
 
-![alt text](accueilBis.jpg)
+![alt text](ApplicationTvGoodGit/screenshots/accueil.jpg)
 
 Search activity
 
-![alt text](searchActivity.jpg)
+![alt text](ApplicationTvGoodGit/screenshots/searchActivity.jpg)
 
-![alt text](searchResult.jpg)
+![alt text](ApplicationTvGoodGit/screenshots/searchResult.jpg)
 
 Add movie to favorites 
 
-![alt text](addToFavorite.jpg)
+![alt text](ApplicationTvGoodGit/screenshots/addToFavorite.jpg)
 
 Display favorites list
 
-![alt text](favoriteList.jpg)
+![alt text](ApplicationTvGoodGit/screenshots/favoriteList.jpg)
 
 Discover new movies sort by genre
 
-![alt text](genre.jpg)
+![alt text](ApplicationTvGoodGit/screenshots/genre.jpg)
 
 
 
