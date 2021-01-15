@@ -7,9 +7,10 @@ ivann.galic@edu.itescia.fr
 This is a school project , Mobile app's examination.
 The project allows to manage movies with requesting https://www.themoviedb.org/ Api.
 You can search movie by title. And you can discover new movies by sorting them by genre, year, etc.
-We used Retrofit for the API's calls,
+We used different libs:
+Retrofit for the API's calls,
 Room to storage on the phone,
-Picasso 
+Picasso to manage pictures.
 
 
 ## Installation
